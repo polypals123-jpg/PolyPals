@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Profile - PolyPals</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="profile.css" />
+  <link rel="stylesheet" href="../community/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="icon" href="../../img/icon.jpeg" type="image/x-icon">
+</head>
+<body>
+  <!-- Top Nav -->
+  <header class="nav">
+    <a class="brand" href="#">
+      <img src="../../img/logo.jpeg" alt="PolyPals logo" />
+      <span class="brand__name">PolyPals</span>
+    </a>
+    <a class="settings-link" aria-label="Settings">
+      <i class="fa fa-cog"></i>
+    </a>
+  </header>
+
+  <!-- Video Background (theme support) -->
+  <div class="theme-video-container">
+    <video id="bgVideo" autoplay muted loop playsinline></video>
+  </div>
+
+  <!-- Profile -->
+  <section class="profile-section">
+    <div class="profile-card">
+
+      <!-- LEFT: avatar -->
+      <aside class="pc-left">
+        <img class="pc-avatar" id="profilePic" src="../../img/logoo.png" alt="Profile picture" />
+      </aside>
+
+      <!-- RIGHT: content -->
+      <div class="pc-right">
+        <!-- top row: name + info (left)  |  stats pill (right) -->
+        <div class="pc-top">
+          <div class="pc-info">
+            <h2 class="pc-name" id="profileName">Chika</h2>
+            <div class="pc-line">
+              <p><i class="fa fa-id-card"></i> <span id="profileMatric">21DDT23F1394</span></p>
+              <p><i class="fa fa-mars"></i> <span id="profileGender">Male</span></p>
+            </div>
+            <div class="pc-line">
+              <p><i class="fa fa-university"></i> <span id="profileInstitute">Polytechnic Balik Pulau</span></p>
+            </div>
+            <div class="pc-line">
+              <p><i class="fa fa-book"></i> <span id="profileCourse">Diploma in Software And Application Development</span></p>
+            </div>
+
+          </div>
+
+          <!-- stats pill -->
+          <div class="pc-stats">
+            <div class="stat"><strong id="profileFollowers">120</strong><small>Followers</small></div>
+            <div class="stat"><strong id="profileFollowing">180</strong><small>Following</small></div>
+            <div class="stat stat-points"><strong id="userPoints">250</strong><small>Points</small></div>
+          </div>
+        </div>
+
+        <!-- bio 100% width -->
+        <div class="pc-bio card">
+          <h4>Bio</h4>
+          <p id="profileBio">Hello! I’m John, a student at PolyPals University. I love coding, shopping, and connecting with the community.</p>
+        </div>
+
+        <!-- actions -->
+        <div class="pc-actions">
+          <button class="btn theme-btn"><i class="fa fa-paint-brush"></i> Themes</button>
+          <button class="btn primary"><i class="fa fa-pen"></i> Edit Profile</button>
+          <button class="btn primary" onclick="window.location.href='seller.html'">
+                <i class="fa fa-store"></i> Become a Seller
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- View Toggle -->
+  <div class="view-toggle">
+    <div class="toggle-btn"><i class="fa fa-border-all active" id="gridView" title="Grid view"></i></div>
+    <div class="toggle-divider"></div>
+    <div class="toggle-btn"><i class="fa fa-bars" id="listView" title="List view"></i></div>
+  </div>
+
+  <!-- Posts Feed (original layout: media → actions → text) -->
+  <section class="posts-feed grid-view" id="postsFeed">
+    <div class="post-card">
+      <div class="post-media"><img src="../../img/logoo.png" alt="Post"></div>
+      <div class="post-actions"><i class="fa fa-heart like-icon"></i><i class="fa fa-comment"></i></div>
+      <p class="post-desc">Enjoying the community vibes at PolyPals 🌟</p>
+    </div>
+
+    <div class="post-card">
+      <div class="post-media">
+        <video controls playsinline>
+          <source src="../../img/spiderman.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="post-actions"><i class="fa fa-heart like-icon"></i><i class="fa fa-comment"></i></div>
+      <p class="post-desc">Sir ithu valliba vayasu. 🎥</p>
+    </div>
+
+    <div class="post-card">
+      <div class="post-media"><img src="../../img/poly.png" alt="Post"></div>
+      <div class="post-actions"><i class="fa fa-heart like-icon"></i><i class="fa fa-comment"></i></div>
+      <p class="post-desc">Working on my project, excited to share updates!</p>
+    </div>
+
+    <div class="post-card">
+      <div class="post-media">
+        <video controls playsinline>
+          <source src="../../img/sample.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="post-actions"><i class="fa fa-heart like-icon"></i><i class="fa fa-comment"></i></div>
+      <p class="post-desc">My first project demo 🎥</p>
+    </div>
+  </section>
+
+  <!-- Settings Sidebar -->
+  <div id="settingsSidebar" class="sidebar">
+    <div class="sidebar-header">
+      <img src="../../img/icon.jpeg" alt="PolyPals Logo" class="logo">
+      <span class="brand-name">PolyPals</span>
+    </div>
+    <hr>
+
+    <ul class="menu">
+      <li><i class="fa fa-user-shield"></i> User Agreement</li>
+      <li><i class="fa fa-lock"></i> Privacy Policy</li>
+      <li><i class="fa fa-question-circle"></i> Help & Support</li>
+      <li><i class="fa fa-info-circle"></i> About</li>
+    </ul>
+
+    <div class="logout">
+      <button id="logoutBtn"><i class="fa fa-sign-out-alt"></i> Log Out</button>
+    </div>
+  </div>
+
+  <!-- Overlay -->
+  <div id="overlay" class="overlay"></div>
+
+  <!-- Bottom Nav -->
+  <nav class="bottom-nav">
+    <a href="../community/index.html" class="nav-item"><i class="fa fa-users"></i><span>Community</span></a>
+    <a href="../home/home.html" class="nav-item"><i class="fa fa-home"></i><span>Home</span></a>
+    <a href="../post/post.html" class="nav-item"><i class="fa fa-plus-circle"></i><span>Post</span></a>
+    <a href="../shop/shop.html" class="nav-item"><i class="fa fa-shopping-bag"></i><span>Shop</span></a>
+    <a href="../profile/profile.html" class="nav-item active"><i class="fa fa-user"></i><span>Profile</span></a>
+  </nav>
+
+  <!-- Theme Modal (unchanged) -->
+  <div class="theme-modal" id="themeModal">
+    <div class="theme-content">
+      <h4>Select Theme</h4>
+      <div class="theme-grid">
+        <div class="theme-option" data-bg="../../img/poly.png" data-type="image"><img src="../../img/poly.png" /></div>
+        <div class="theme-option" data-bg="../../img/chat.png" data-type="image"><img src="../../img/chat.png" /></div>
+        <div class="theme-option" data-bg="../../img/logoo.png" data-type="image"><img src="../../img/logoo.png" /></div>
+        <div class="theme-option" data-bg="../../img/lotus.mp4" data-type="video"><video src="../../img/lotus.mp4" muted playsinline></video></div>
+      </div>
+      <div class="theme-actions">
+        <button id="closeTheme">Close</button>
+        <button id="resetTheme">Reset Theme</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Quiz Floating -->
+  <div class="ai-floating-btn" id="aiBtn"><i class="fa fa-robot"></i></div>
+  <div class="ai-panel" id="aiPanel">
+    <h4>AI Quiz</h4>
+    <p id="aiQuestion">What does HTML stand for?</p>
+    <input id="aiAnswer" placeholder="Type your answer..." />
+    <button id="submitAnswer">Submit</button>
+  </div>
+
+  <!-- Firebase Config -->
+<!-- Firebase SDKs (compat version) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
+
+<!-- Your config -->
+<script src="../../firebase-config.js"></script>
+
+<!-- Your page logic -->
+<script src="profile.js"></script>
+
+
+</body>
+</html>

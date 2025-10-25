@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PolyPals Profile</title>
+  <link rel="stylesheet" href="profile.css"/>
+  <link rel="stylesheet" href="../community/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+</head>
+<body>
+
+ <!-- Top Nav -->
+  <header class="nav">
+    <a class="brand" href="#">
+      <img src="../../img/logo.jpeg" alt="PolyPals logo" />
+      <span class="brand__name">PolyPals</span>
+    </a>
+    <a class="settings-link" aria-label="Settings">
+      <i class="fa fa-cog"></i>
+    </a>
+  </header>
+
+  <!-- Video Background (theme support) -->
+  <div class="theme-video-container">
+    <video id="bgVideo" autoplay muted loop playsinline></video>
+  </div>
+
+  <!-- Profile -->
+<!-- Profile -->
+<section class="profile-section">
+  <div class="profile-card pc-info-card">
+
+    <!-- Top Header with avatar + name side-by-side -->
+    <div class="pc-info-header">
+      <img class="pc-avatar" id="profilePic" src="../../img/logoo.png" alt="Profile picture" />
+      <h2 class="pc-name" id="profileName">NAME</h2>
+    </div>
+
+    <!-- Details -->
+    <div class="pc-details">
+      <div class="pc-line">
+        <i class="fa fa-id-card"></i>
+        <span id="profileMatric">MATRIC</span>
+        <span class="divider">|</span>
+        <i class="fa fa-mars"></i>
+        <span id="profileGender">GENDER</span>
+      </div>
+      <div class="pc-line">
+        <i class="fa fa-university"></i>
+        <span id="profileInstitute">INSTITUTE</span>
+      </div>
+      <div class="pc-line">
+        <i class="fa fa-book"></i>
+        <span id="profileCourse">COURSE</span>
+      </div>
+    </div>
+
+    <!-- Bio -->
+    <div class="pc-bio">
+      <h4>Bio</h4>
+      <p id="profileBio">BIO</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="pc-stats">
+      <div class="stat">
+        <i class="fa fa-users"></i>
+        <strong id="profileFollowers">0</strong>
+        <small>Followers</small>
+      </div>
+      <div class="stat">
+        <i class="fa fa-user-plus"></i>
+        <strong id="profileFollowing">0</strong>
+        <small>Following</small>
+      </div>
+      <div class="stat stat-points">
+        <i class="fa fa-medal"></i>
+        <strong id="userPoints">0</strong>
+        <small>Points</small>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="pc-actions">
+      <button class="btn theme-btn" onclick="window.location.href='themes.html'">
+        <i class="fa fa-paint-brush"></i> Themes
+      </button>
+      <button class="btn primary" id="editProfileBtn"><i class="fa fa-pen"></i> Edit Profile</button>
+      <button class="btn primary" id="becomeSellerBtn">
+        <i class="fa fa-store"></i> Become a Seller
+      </button>
+
+      <button class="btn primary" id="sellerAnalyticsBtn" style="display:none">
+        <i class="fa fa-chart-line"></i> Store Analytics
+      </button>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- View Toggle -->
+<div class="view-toggle">
+  <div class="toggle-btn active" id="gridView">
+    <i class="fa fa-border-all"></i>
+  </div>
+  <div class="toggle-btn" id="savedView">
+    <i class="fa fa-bookmark"></i>
+  </div>
+</div>
+
+
+<!-- Personal Posts Grid -->
+<div id="postsFeed" class="posts-feed grid-view"></div>
+
+<!-- Saved Posts Grid -->
+<div id="savedFeed" class="posts-feed grid-view hidden"></div>
+
+<!-- Overlay + Expanded Container -->
+<!-- Overlay -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Expanded Post -->
+<div class="expanded-post" id="expandedPost">
+
+  <!-- Header -->
+  <div class="post-header">
+    <img class="avatar" src="https://placehold.co/50x50" alt="user avatar">
+    <div class="user-info">
+      <span class="username">User Name <i class="fa fa-check-circle verified"></i></span>
+      <p class="course">Course Name</p>
+    </div>
+    <div class="post-options">
+      <i class="fa fa-ellipsis-h"></i>
+      <ul class="options-menu">
+        <li><i class="fa fa-edit"></i> Edit</li>
+        <li><i class="fa fa-trash"></i> Delete</li>
+        <li><i class="fa fa-bookmark"></i> Save</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Media -->
+  <div class="media-container"><!-- JS will inject <img> or <video> here --></div>
+
+
+  <!-- Caption -->
+  <p class="post-desc"></p>
+  <!-- Time below caption -->
+  <p class="post-time"></p> <!-- NEW element -->
+
+  <!-- Actions -->
+  <div class="post-actions">
+    <i class="fa-regular fa-heart like-btn"></i>
+    <i class="fa-regular fa-comment"></i>
+    <i class="fa-solid fa-share-nodes share-btn"></i>
+  </div>
+
+
+  <!-- Stats -->
+  <div class="post-stats"></div>
+
+  <!-- Comments -->
+  <div class="comment-box">
+    <input type="text" placeholder="Add a comment...">
+    <button class="send-comment"><i class="fa fa-paper-plane"></i></button>
+  </div>
+
+  <!-- 🔥 Add this below the comment box -->
+<div class="comments-list"></div>
+</div>
+
+
+
+  <!-- Share Popup -->
+<div id="sharePopup" class="share-popup hidden">
+  <div class="share-content">
+    <div class="share-header">
+      <h3>Share Post</h3>
+      <span class="close-btn" onclick="closeSharePopup()">&times;</span>
+    </div>
+    <div class="share-grid">
+      <button onclick="shareTo('whatsapp')">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span>WhatsApp</span>
+      </button>
+      <button onclick="shareTo('instagram')">
+        <i class="fa-brands fa-instagram"></i>
+        <span>Instagram</span>
+      </button>
+      <button onclick="shareTo('telegram')">
+        <i class="fa-brands fa-telegram"></i>
+        <span>Telegram</span>
+      </button>
+      <button onclick="copyLink()">
+        <i class="fa fa-link"></i>
+        <span>Copy Link</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="editProfileModal" class="modal">
+  <div class="modal-content">
+    <!-- Header -->
+    <div class="modal-header">
+      <h2>Edit Profile</h2>
+    </div>
+
+    <!-- Body -->
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="editName">Name</label>
+        <input type="text" id="editName" placeholder="Enter name">
+      </div>
+
+      <div class="form-group">
+        <label for="editCourse">Course</label>
+        <select id="editCourse">
+          <option value="">-- Select Course --</option>
+          <option value="Diploma in Software and Application Development">Diploma in Software and Application Development</option>
+          <option value="Diploma in Computer Science">Diploma in Computer Science</option>
+          <option value="Diploma in Electrical Engineering">Diploma in Electrical Engineering</option>
+          <option value="Diploma in Business Management">Diploma in Business Management</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="editBio">Bio</label>
+        <textarea id="editBio" placeholder="Write something..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="editPic">Profile Picture</label>
+        <input type="file" id="editPic" accept="image/*">
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="modal-actions">
+      <button id="saveProfileBtn" class="btn primary">
+        <span class="btn-icon"><i class="fa fa-save"></i></span>
+        <span class="btn-text">Save</span>
+      </button>
+      <button id="cancelEditBtn" class="btn cancel">
+        <i class="fa fa-times"></i> Cancel
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  <!-- Settings Sidebar -->
+  <div id="settingsSidebar" class="sidebar">
+    <div class="sidebar-header">
+      <img src="../../img/icon.jpeg" alt="PolyPals Logo" class="logo">
+      <span class="brand-name">PolyPals</span>
+    </div>
+    <hr>
+
+    <ul class="menu">
+      <li><i class="fa fa-user-shield"></i> User Agreement</li>
+      <li><i class="fa fa-lock"></i> Privacy Policy</li>
+      <li><i class="fa fa-question-circle"></i> Help & Support</li>
+      <li><i class="fa fa-info-circle"></i> About</li>
+    </ul>
+
+    <div class="logout">
+      <button id="logoutBtn"><i class="fa fa-sign-out-alt"></i> Log Out</button>
+    </div>
+  </div>
+
+
+  <!-- Bottom Nav -->
+  <nav class="bottom-nav">
+    <a href="../community/community.html" class="nav-item"><i class="fa fa-users"></i><span>Community</span></a>
+    <a href="../home/home.html" class="nav-item"><i class="fa fa-home"></i><span>Home</span></a>
+    <a href="../post/post.html" class="nav-item"><i class="fa fa-plus-circle"></i><span>Post</span></a>
+    <a href="../shop/shop.html" class="nav-item"><i class="fa fa-shopping-bag"></i><span>Shop</span></a>
+    <a href="../profile/profile.html" class="nav-item active"><i class="fa fa-user"></i><span>Profile</span></a>
+  </nav>
+
+  <!-- AI Quiz Floating -->
+  <div class="ai-floating-btn" id="aiBtn"><i class="fa fa-robot"></i></div>
+  <div class="ai-panel" id="aiPanel">
+    <h4>AI Quiz</h4>
+    <p id="aiQuestion">.</p>
+    <input id="aiAnswer" placeholder="Type your answer..." />
+    <button id="submitAnswer">Submit</button>
+  </div>
+
+  <!-- Firebase Config -->
+<!-- Firebase SDKs (compat version) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-functions-compat.js"></script>
+
+<!-- Your config -->
+<script src="../../firebase-config.js"></script>
+
+<!-- Your page logic -->
+<script type="module" src="profile.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Profile</title>
+  <link rel="stylesheet" href="profile_update.css">
+</head>
+<body>
+  <div class="update-wrapper">
+    <div class="update-card">
+      <h2>Complete Your Profile</h2>
+      <form id="profileUpdateForm">
+        <input type="text" id="name" placeholder="Full Name" required>
+
+        <!-- Course dropdown -->
+        <select id="course" required>
+            <option value="">Select Course</option>
+            <option value="Diploma in Software and Application Development">Diploma in Software and Application Development</option>
+            <option value="Diploma in Information Technology">Diploma in Information Technology</option>
+            <option value="Diploma in Digital Technology">Diploma in Digital Technology</option>
+            <option value="Diploma in Computer Science">Diploma in Computer Science</option>
+            <option value="Diploma in Data Analytics">Diploma in Data Analytics</option>
+            <option value="Diploma in Networking Systems">Diploma in Networking Systems</option>
+            <option value="Diploma in Cybersecurity">Diploma in Cybersecurity</option>
+            <option value="Diploma in Business Management">Diploma in Business Management</option>
+            <option value="Diploma in Accounting">Diploma in Accounting</option>
+            <option value="Diploma in Engineering Technology">Diploma in Engineering Technology</option>
+        </select>
+
+        <!-- Gender dropdown -->
+        <select id="gender" required>
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+
+        <textarea id="bio" placeholder="Write your bio..."></textarea>
+
+        <label for="profilePic">Profile Picture:</label>
+        <input type="file" id="profilePic" accept="image/*">
+
+        <!-- Animated submit button -->
+        <div class="container">
+            <button id="submitBtn" type="submit"></button>
+        </div>
+        </form>
+
+
+    </div>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
+
+  <!-- Config -->
+  <script src="../../firebase-config.js"></script>
+
+  <!-- Page Logic -->
+  <script src="profile_update.js"></script>
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PolyPals Expandable Post</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 40px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .post-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 15px;
+      width: 380px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    /* Expanded mode */
+    .post-card.expanded {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(1.02);
+      width: 95%;
+      max-width: 700px;
+      height: auto;
+      z-index: 100;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      z-index: 90;
+    }
+    .overlay.active { display: block; }
+
+    .close-btn {
+      position: absolute;
+      top: 12px; right: 15px;
+      font-size: 20px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      z-index: 101;
+    }
+    .post-card.expanded .close-btn { display: block; }
+
+    /* Header */
+    .post-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .post-header .avatar {
+      width: 45px; height: 45px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    .user-info { flex: 1; }
+    .username { font-weight: bold; font-size: 14px; }
+    .verified { color: #4B2CFF; font-size: 14px; }
+    .meta { font-size: 12px; color: gray; }
+
+    .post-options {
+      position: relative;
+      display: inline-block;
+    }
+    .post-options i {
+      cursor: pointer;
+      padding: 4px;
+    }
+    .options-menu {
+      display: none;
+      position: absolute;
+      top: 100%; /* directly below icon */
+      right: 0;
+      margin-top: 6px;
+      background: #fff;
+      border-radius: 10px;
+      list-style: none;
+      padding: 6px 0;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      z-index: 200;
+      min-width: 130px;
+      opacity: 0;
+      transform: translateY(-5px);
+      transition: all 0.2s ease;
+    }
+    .options-menu.show {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .options-menu li {
+      padding: 8px 15px;
+      font-size: 14px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .options-menu li:hover {
+      background: #f5f5f5;
+    }
+
+    /* Media */
+    .media-container {
+      margin: 10px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #fafafa;
+    }
+    .post-media {
+      width: 400px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: transform 0.3s;
+    }
+    .post-media:hover { transform: scale(1.02); }
+
+    /* Caption */
+    .post-desc { font-size: 14px; margin: 10px 0; }
+    .mention { color: #6C63FF; font-weight: 600; cursor: pointer; }
+    .hashtag { color: #9D4EDD; cursor: pointer; }
+
+    /* Actions */
+    .post-actions { display: flex; gap: 20px; font-size: 18px; margin: 10px 0; }
+    .post-actions i { cursor: pointer; transition: color 0.2s; }
+    .like-btn.liked { color: red; }
+
+    /* Stats */
+    .post-stats { font-size: 13px; color: gray; }
+    .comments-preview { margin-top: 5px; font-size: 12px; color: #555; }
+
+    /* Comment box */
+    .comment-box {
+      display: flex; align-items: center;
+      margin-top: 10px; border-top: 1px solid #eee;
+      padding-top: 8px;
+    }
+    .comment-box input {
+      flex: 1;
+      padding: 6px 10px;
+      border: none; border-radius: 20px;
+      background: #f0f2f5; outline: none;
+      font-size: 13px;
+    }
+    .comment-box button {
+      margin-left: 8px;
+      border: none; background: #6C63FF;
+      color: #fff; border-radius: 20px;
+      padding: 6px 12px; cursor: pointer; font-size: 13px;
+    }
+
+    /* Own vs Public */
+    .own-post .post-header { border-left: 4px solid #6C63FF; padding-left: 6px; }
+    .public-post .post-header { border-left: 4px solid #9D4EDD; padding-left: 6px; }
+  </style>
+</head>
+<body>
+
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Own Post -->
+  <div class="post-card own-post" data-post-id="12345" onclick="expandCard(this)">
+    <span class="close-btn" onclick="closeCard(event,this)">&times;</span>
+    <div class="post-header">
+      <img class="avatar" src="https://placehold.co/50x50">
+      <div class="user-info">
+        <span class="username">You <i class="fa fa-check-circle verified"></i></span>
+        <p class="meta">Your Course · just now</p>
+      </div>
+      <div class="post-options">
+        <i class="fa fa-ellipsis-h"></i>
+        <ul class="options-menu">
+          <li onclick="editPost('12345')"><i class="fa fa-edit"></i> Edit</li>
+          <li onclick="deletePost('12345')"><i class="fa fa-trash"></i> Delete</li>
+          <li><i class="fa fa-bookmark"></i> Save</li>
+        </ul>
+      </div>
+    </div>
+    <div class="media-container">
+      <img src="https://placehold.co/400x250" class="post-media">
+    </div>
+    <p class="post-desc">My own post with @Siti 🚀🔥</p>
+    <div class="post-actions">
+      <i class="fa-regular fa-heart like-btn"></i>
+      <i class="fa-regular fa-comment"></i>
+      <i class="fa-solid fa-share-nodes"></i>
+      <i class="fa-regular fa-bookmark save-btn"></i>
+    </div>
+    <div class="post-stats"><span>Liked by <b>Ali</b> and 10 others</span></div>
+    <div class="comment-box">
+      <input type="text" placeholder="Add a comment...">
+      <button>Post</button>
+    </div>
+  </div>
+
+  <!-- Public Post -->
+  <div class="post-card public-post" data-post-id="67890" onclick="expandCard(this)">
+    <span class="close-btn" onclick="closeCard(event,this)">&times;</span>
+    <div class="post-header">
+      <img class="avatar" src="https://placehold.co/50x50">
+      <div class="user-info">
+        <span class="username">Ali <i class="fa fa-check-circle verified"></i></span>
+        <p class="meta">Computer Science · 1h ago</p>
+      </div>
+      <div class="post-options">
+        <i class="fa fa-ellipsis-h"></i>
+        <ul class="options-menu">
+          <li><i class="fa fa-bookmark"></i> Save</li>
+          <li><i class="fa fa-flag"></i> Report</li>
+        </ul>
+      </div>
+    </div>
+    <div class="media-container">
+      <img src="https://placehold.co/400x250/EEE" class="post-media">
+    </div>
+    <p class="post-desc">Public event for #PolyPals with @Rahman 🎉</p>
+    <div class="post-actions">
+      <i class="fa-regular fa-heart like-btn"></i>
+      <i class="fa-regular fa-comment"></i>
+      <i class="fa-solid fa-share-nodes"></i>
+      <i class="fa-regular fa-bookmark save-btn"></i>
+    </div>
+    <div class="post-stats">
+      <span>Liked by <b>You</b> and 23 others</span>
+      <p class="comments-preview">💬 Siti: "Excited to join!"</p>
+    </div>
+    <div class="comment-box">
+      <input type="text" placeholder="Add a comment...">
+      <button>Post</button>
+    </div>
+  </div>
+
+  <script>
+    const overlay = document.getElementById("overlay");
+
+    function expandCard(card) {
+      if (card.classList.contains("expanded")) return;
+      document.querySelectorAll(".post-card").forEach(c => c.classList.remove("expanded"));
+      card.classList.add("expanded");
+      overlay.classList.add("active");
+    }
+
+    function closeCard(e, btn) {
+      e.stopPropagation();
+      btn.closest(".post-card").classList.remove("expanded");
+      overlay.classList.remove("active");
+    }
+
+    overlay.addEventListener("click", () => {
+      document.querySelectorAll(".post-card").forEach(c => c.classList.remove("expanded"));
+      overlay.classList.remove("active");
+    });
+
+    // menu toggle
+    document.querySelectorAll('.post-options .fa-ellipsis-h').forEach(icon => {
+      icon.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const menu = icon.nextElementSibling;
+        menu.classList.toggle("show");
+      });
+    });
+
+    // close menus when clicking outside
+    document.addEventListener("click", function(e) {
+      document.querySelectorAll(".options-menu").forEach(menu => {
+        if (!menu.previousElementSibling.contains(e.target)) {
+          menu.classList.remove("show");
+        }
+      });
+    });
+
+    // like button toggle
+    document.querySelectorAll('.like-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        btn.classList.toggle("liked");
+        btn.classList.toggle("fa-solid");
+        btn.classList.toggle("fa-regular");
+      });
+    });
+
+    function editPost(id){ alert("Edit post " + id); }
+    function deletePost(id){ alert("Delete post " + id); }
+  </script>
+</body>
+</html>

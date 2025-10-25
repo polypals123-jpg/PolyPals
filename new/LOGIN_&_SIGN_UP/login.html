@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="../img/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="login_style.css">
+
+    <title>Login Form</title>
+    
+</head>
+
+<body>
+
+    <div class="box">
+        <div class="flip-card-inner">
+            <div class="box-login">
+                <ul>
+                    <form onsubmit="event.preventDefault(); login();">
+                        <h1>LOGIN</h1>
+                        <div class="email-login">
+                            <input class="inpt" type="text" name="email" id="login-identifier" placeholder="Email / Matric / IC / Staff Id" required>
+                            <i class='fa fa-envelope'></i>
+                        </div>
+
+                        <div class="password-login">
+                            <input class="inpt" type="password" name="password" id="password-login"
+                                placeholder="Password" required>
+                            <i id="eye-login" class="fa fa-eye-slash"></i>
+                        </div>
+
+                            <div class="poly-select-box">
+                                <select id="polySelect" required>
+                                    <option value="" disabled selected>-- Choose your Polytechnic --</option>
+                                    <option value="pbu">Politeknik Balik Pulau (PBU)</option>
+                                    <option value="psp">Politeknik Seberang Perai (PSP)</option>
+                                    <option value="pkd">Politeknik Kota Damansara (PKD)</option>
+                                    <option value="ptss">Politeknik Tuanku Syed Sirajuddin (PTSS)</option>
+                                    <!-- add more polys as needed -->
+                                </select>
+                            </div>
+
+                        <div class="forget">
+                            <input type="checkbox" id="rememberMe">
+                            <label for="rememberMe">Remember me</label>
+                            <a href="#" onclick="forgotPassword()">Forget Password?</a>
+                        </div>
+
+
+
+                        <button type="submit" class="btn">LOGIN</button>
+                    </form>
+                        
+                    <div class="register-link">
+                        <p>
+                            Don’t have an account? 
+                            <a href="#" onclick="showStudentSignup(); return false;">Register</a><br>
+                            Are you staff? 
+                            <a href="#" onclick="showStaffSignup(); return false;">Create Staff Account</a>
+                        </p>
+                    </div>
+                </ul>
+            </div>
+            <div class="box-signup" id="student-signup-box">
+
+                <ul>
+                    <form onsubmit="event.preventDefault(); signUp();">
+                        <h2>SIGN UP</h2>
+                        <div class="matric-signup">
+                            <input class="inpt" type="text" name="" id="matric" placeholder="Matric No " required>
+                            <i class="fa fa-user"></i>
+                        </div>
+
+                        <div class="ic-signup">
+                            <input class="inpt" type="text" name="" id="ic" placeholder="Indentity No" required>
+                            <i class='fa fa-id-card'></i>
+
+                        </div>
+
+                        <div class="email-signup">
+                            <input class="inpt" type="email" name="email" id="email-login" placeholder="E-mail " required>
+                            <i class='fa fa-envelope'></i>
+
+                        </div>
+
+                        <div class="password-signup">
+                            <input class="inpt" type="password" name="password" id="password-signup"
+                                placeholder="Password" required>
+                            <i id="eye-signup" class="fa fa-eye-slash"></i>
+
+                        </div>
+
+                         <div class="reconfirm_password-signup">
+                            <input class="inpt" type="password" name="password" id="password-confirm-signup"
+                                placeholder="Confirm Password" required>
+                            <i id="eye-confirm-signup" class="fa fa-eye-slash"></i>
+
+                        </div>
+                        <button type="submit" class="btn">SIGN UP</button>
+
+                    </form>
+                    <div class="register-link">
+                        <p>Already have an account? <a href="#" onclick="flipAgain()">Log In</a></p>
+                    </div>
+                </ul>
+            </div>
+
+            <div class="box-signup" id="staff-signup-box" style="display:none;">
+                <ul>
+                    <form onsubmit="event.preventDefault(); staffSignUp();">
+                    <h2>STAFF SIGN UP</h2>
+
+                    <div class="staffid-signup">
+                        <input class="inpt" type="text" id="staffId" placeholder="Staff ID" required>
+                        <i class="fa fa-id-badge"></i>
+                    </div>
+
+                    <div class="ic-signup">
+                        <input class="inpt" type="text" id="staffIc" placeholder="Identity No" required>
+                        <i class="fa fa-id-card"></i>
+                    </div>
+
+                    <div class="email-signup">
+                        <input class="inpt" type="email" id="staffEmail" placeholder="E-mail" required>
+                        <i class="fa fa-envelope"></i>
+                    </div>
+
+                    <div class="password-signup">
+                        <input class="inpt" type="password" id="staffPassword" placeholder="Password" required>
+                        <i id="eye-staff" class="fa fa-eye-slash"></i>
+                    </div>
+
+                    <div class="reconfirm_password-signup">
+                        <input class="inpt" type="password" id="staffConfirmPassword" placeholder="Confirm Password" required>
+                        <i id="eye-staff-confirm" class="fa fa-eye-slash"></i>
+                    </div>
+
+                    <button type="submit" class="btn">SIGN UP</button>
+                    </form>
+
+                    <div class="register-link">
+                        <p>Already staff? <a href="#" onclick="flipAgain()">Log In</a>
+                    </div>
+                </ul>
+            </div>
+
+
+        </div>
+    </div>
+
+</body>
+
+<!-- Your existing JS -->
+<script type="module" src="login_script.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyByvm5GBFh7vjw5J64p2f1HJK3wELsB0sI",
+    authDomain: "polypals-a3dff.firebaseapp.com",
+    projectId: "polypals-a3dff",
+    storageBucket: "polypals-a3dff.appspot.com",
+    messagingSenderId: "790460205163",
+    appId: "1:790460205163:web:cc18b4d834580411c6892e",
+    measurementId: "G-LHSGNHVP1H"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+</script>
+
+
+
+</html>

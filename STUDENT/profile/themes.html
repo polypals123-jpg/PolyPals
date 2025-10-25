@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PolyPals Themes</title>
+  <link rel="stylesheet" href="themes.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+ 
+    <!-- Top Banner -->
+<div class="theme-banner">
+  <div class="banner-left">
+    <button class="back-btn" ><i class="fas fa-arrow-left" onclick="window.location.href='profil.html'"></i></button>
+    <div class="banner-text">
+      <h2><i class="fas fa-palette"></i> Customize Your PolyPals</h2>
+      <p>Browse and unlock premium themes</p>
+    </div>
+  </div>
+
+  <div class="banner-right">
+    <div class="marquee">
+      <span><span class="highlight">Theme of the Month:</span> Neon Pulse — Bonus avatar borders at 200 points 🔥</span>
+      <span><span class="highlight">Theme of the Month:</span> Neon Pulse — Bonus avatar borders at 200 points 🔥</span>
+    </div>
+  </div>
+</div>
+
+
+
+  </header>
+
+  <!-- PolyCC Themes -->
+  <section class="themes-section">
+    <div class="section-header">
+      <h2><i class="fa-solid fa-star"></i> PolyCC Applied Themes</h2>
+      <div class="scroll-arrows">
+        <button class="scroll-btn left" data-target="polyccRow"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="scroll-btn right" data-target="polyccRow"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    </div>
+    <div class="themes-row" id="polyccRow">
+      <div class="theme-card" data-theme="PolyCC Galaxy">
+        <video class="preview-video" src="assets/themes/galaxy.webm" poster="assets/themes/galaxy.jpg" muted loop></video>
+        <div class="card-footer">
+          <h3>PolyCC Galaxy</h3>
+          <p>Cosmic background</p>
+          <div class="actions">
+            <button class="btn preview-btn">Preview</button>
+            <button class="btn apply-btn">Apply</button>
+          </div>
+        </div>
+      </div>
+      <div class="theme-card" data-theme="PolyCC Festive">
+        <video class="preview-video" src="assets/themes/festive.webm" poster="assets/themes/festive.jpg" muted loop></video>
+        <div class="card-footer">
+          <h3>PolyCC Festive</h3>
+          <p>Seasonal celebrations 🎉</p>
+          <div class="actions">
+            <button class="btn preview-btn">Preview</button>
+            <button class="btn apply-btn">Apply</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- User Themes -->
+  <section class="themes-section">
+    <div class="section-header">
+      <h2><i class="fa-solid fa-layer-group"></i> User Themes</h2>
+      <div class="scroll-arrows">
+        <button class="scroll-btn left" data-target="userRow"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="scroll-btn right" data-target="userRow"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    </div>
+    <div class="themes-row" id="userRow">
+      <div class="theme-card" data-theme="Purple Glass">
+        <video class="preview-video" poster="assets/themes/purple-glass.jpg"></video>
+        <div class="card-footer">
+          <h3>Purple Glass</h3>
+          <p>Default experience</p>
+          <div class="actions">
+            <button class="btn preview-btn">Preview</button>
+            <button class="btn apply-btn">Apply</button>
+          </div>
+        </div>
+      </div>
+      <div class="theme-card" data-theme="Neon Pulse">
+        <video class="preview-video" src="assets/themes/neon-pulse.webm" poster="assets/themes/neon-pulse.jpg" muted loop></video>
+        <div class="card-footer">
+          <h3>Neon Pulse</h3>
+          <p>Cyberpunk glowing edges</p>
+          <div class="actions">
+            <button class="btn preview-btn">Preview</button>
+            <button class="btn apply-btn">Apply</button>
+          </div>
+        </div>
+      </div>
+      <div class="theme-card locked" data-theme="Retro Pixel">
+        <video class="preview-video" poster="assets/themes/retro-pixel.jpg"></video>
+        <span class="badge-locked">1000 pts</span>
+        <div class="card-footer">
+          <h3>Retro Pixel</h3>
+          <p>Unlock at 1000 Points 🎮</p>
+          <button class="btn" disabled>Locked</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Coming Soon -->
+  <section class="themes-section">
+    <div class="section-header">
+      <h2><i class="fa-solid fa-rocket"></i> Coming Soon</h2>
+    </div>
+    <div class="themes-row">
+      <div class="theme-card coming">
+        <video class="preview-video" poster="assets/themes/coming-galaxy.jpg"></video>
+        <div class="card-footer">
+          <h3>Galaxy Event Theme</h3>
+          <p>Available during next Poly event 🌌</p>
+        </div>
+      </div>
+      <div class="theme-card coming">
+        <video class="preview-video" poster="assets/themes/coming-borders.jpg"></video>
+        <div class="card-footer">
+          <h3>Avatar Borders</h3>
+          <p>Unlock via achievements ✨</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Preview Overlay -->
+  <div id="previewOverlay" class="preview hidden">
+    <div class="mock-app">
+      <div class="mock-top">
+        <span class="mock-logo">PolyPals</span>
+        <div class="mock-icons">
+          <i class="fa-regular fa-bell"></i>
+          <i class="fa-regular fa-message"></i>
+          <i class="fa-regular fa-user"></i>
+        </div>
+      </div>
+      <div class="mock-feed">
+        <div class="mock-post"></div>
+        <div class="mock-post"></div>
+        <div class="mock-post"></div>
+      </div>
+      <div class="mock-bottom">
+        <i class="fa-solid fa-house"></i>
+        <i class="fa-solid fa-users"></i>
+        <i class="fa-solid fa-plus-circle"></i>
+        <i class="fa-solid fa-store"></i>
+        <i class="fa-solid fa-user"></i>
+      </div>
+      <div class="mock-actions">
+        <button id="applyTheme" class="btn">Apply</button>
+        <button id="closePreview" class="btn btn-ghost">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="themes.js"></script>
+</body>
+</html>

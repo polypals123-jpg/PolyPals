@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>PolyPals | Notifications</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{
+  min-height:100vh;
+  background:linear-gradient(135deg,#4B2CFF,#6C63FF,#9D4EDD);
+  background-size:300% 300%;
+  animation:bgshift 10s ease infinite alternate;
+  overflow-y:auto;
+  -ms-overflow-style:none;
+  scrollbar-width:none;
+}
+body::-webkit-scrollbar{display:none;}
+@keyframes bgshift{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+
+header{
+  position:sticky;top:0;z-index:99;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(10px);
+  text-align:center;
+  color:#fff;
+  font-size:clamp(1rem,4vw,1.3rem);
+  font-weight:600;
+  padding:14px 0;
+  border-bottom:1px solid rgba(255,255,255,0.2);
+}
+
+.tabs{
+  display:flex;
+  justify-content:space-around;
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(8px);
+  flex-wrap:wrap;
+}
+.tab{
+  flex:1;text-align:center;
+  padding:10px 0;
+  color:#ccc;
+  font-size:clamp(0.75rem,3vw,0.9rem);
+  cursor:pointer;
+  transition:.3s;
+  position:relative;
+  min-width:60px;
+}
+.tab.active{color:#fff;font-weight:600;}
+.tab.active::after{
+  content:"";position:absolute;bottom:0;left:50%;
+  transform:translateX(-50%);
+  width:30%;height:2px;background:#fff;border-radius:4px;
+}
+
+.container{
+  width:95%;
+  max-width:500px;
+  margin:15px auto;
+  padding-bottom:50px;
+}
+
+.notif-card{
+  display:flex;align-items:flex-start;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(12px);
+  color:#fff;
+  margin:10px 0;
+  border-radius:16px;
+  padding:clamp(8px,3vw,12px);
+  transition:.3s;
+}
+.notif-card:hover{background:rgba(255,255,255,0.25);}
+.notif-card img.profile{
+  width:clamp(38px,10vw,50px);
+  height:clamp(38px,10vw,50px);
+  border-radius:50%;
+  margin-right:10px;
+  border:2px solid rgba(255,255,255,0.3);
+  object-fit:cover;
+}
+.notif-info{flex:1;}
+.notif-info p{
+  font-size:clamp(0.8rem,3vw,0.95rem);
+  margin-bottom:4px;
+  line-height:1.4;
+}
+.notif-info span.time{
+  font-size:clamp(0.7rem,2.5vw,0.85rem);
+  color:#ddd;
+}
+.notif-icon{
+  font-size:clamp(1rem,5vw,1.3rem);
+  margin-left:8px;opacity:.8;
+}
+.reply-btn{
+  color:#B388FF;
+  font-size:clamp(0.7rem,2.5vw,0.85rem);
+  cursor:pointer;
+  margin-top:4px;
+  display:inline-block;
+}
+.reply-box{
+  margin-top:6px;
+  background:rgba(255,255,255,0.1);
+  border-radius:10px;
+  padding:6px 8px;
+}
+.reply-box input{
+  width:100%;
+  background:transparent;
+  border:none;outline:none;
+  color:#fff;
+  font-size:clamp(0.75rem,2.5vw,0.9rem);
+}
+.reply-list{
+  margin-top:8px;margin-left:10px;
+  border-left:2px solid rgba(255,255,255,0.2);
+  padding-left:8px;
+}
+.reply-item{
+  font-size:clamp(0.7rem,2.5vw,0.85rem);
+  color:#eee;
+  margin:2px 0;
+}
+
+@media (min-width:768px){
+  .container{max-width:600px;}
+}
+@media (min-width:1024px){
+  .container{max-width:700px;}
+}
+</style>
+</head>
+
+<body>
+<header>Notifications</header>
+<div class="tabs" id="tabs"></div>
+<div class="container" id="notifContainer"></div>
+
+<script>
+const isSeller=true;
+
+const notifications=[
+  {type:"like",user:"Alya",action:"liked your post",time:"2h ago",profile:"https://i.pravatar.cc/100?img=1"},
+  {type:"comment",user:"Nina",action:"commented:",comment:"This is awesome 🔥",time:"5h ago",profile:"https://i.pravatar.cc/100?img=3",replies:["Thanks!","Appreciate ❤️"]},
+  {type:"follow",user:"Guna",action:"started following you",time:"1d ago",profile:"https://i.pravatar.cc/100?img=2"},
+  {type:"like",user:"Rafiq",action:"liked your post",time:"2d ago",profile:"https://i.pravatar.cc/100?img=4"},
+  {type:"comment",user:"Amira",action:"commented:",comment:"Where did you buy this?",time:"3d ago",profile:"https://i.pravatar.cc/100?img=5"},
+  {type:"store",user:"Poly Store",action:"Your order #1121 has been delivered ✅",time:"4d ago",profile:"https://placehold.co/80x80/9D4EDD/FFF?text=🛍️"}
+];
+
+// Tabs
+const tabList=["All","Likes","Comments","Follow",...(isSeller?["Store"]:[])];
+const tabsEl=document.getElementById("tabs");
+tabList.forEach((t,i)=>{
+  const div=document.createElement("div");
+  div.className=`tab ${i===0?"active":""}`;
+  div.dataset.tab=t.toLowerCase();
+  div.textContent=t;
+  tabsEl.appendChild(div);
+});
+
+const container=document.getElementById("notifContainer");
+function renderTab(tab){
+  container.innerHTML="";
+  const data=notifications.filter(n=>{
+    if(tab==="all")return true;
+    if(tab==="likes")return n.type==="like";
+    if(tab==="comments")return n.type==="comment";
+    if(tab==="follow")return n.type==="follow";
+    if(tab==="store")return n.type==="store";
+  });
+  data.forEach((n,i)=>{
+    const card=document.createElement("div");
+    card.className="notif-card";
+    let icon="";
+    if(n.type==="like")icon='<i class="fa-solid fa-heart notif-icon"></i>';
+    if(n.type==="comment")icon='<i class="fa-solid fa-comment notif-icon"></i>';
+    if(n.type==="follow")icon='<i class="fa-solid fa-user-plus notif-icon"></i>';
+    if(n.type==="store")icon='<i class="fa-solid fa-store notif-icon"></i>';
+    card.innerHTML=`
+      <img class="profile" src="${n.profile}" alt="">
+      <div class="notif-info">
+        <p><b>${n.user}</b> ${n.action} ${n.comment?`"${n.comment}"`:""}</p>
+        <span class="time">${n.time}</span>
+        ${n.type==="comment"?`<div class="reply-btn" data-index="${i}">Reply</div>`:""}
+        ${n.replies?`<div class="reply-list" id="replies-${i}">${n.replies.map(r=>`<div class='reply-item'>↳ ${r}</div>`).join("")}</div>`:""}
+      </div>
+      ${icon}
+    `;
+    container.appendChild(card);
+  });
+}
+renderTab("all");
+
+// Tab switch
+tabsEl.addEventListener("click",e=>{
+  if(e.target.classList.contains("tab")){
+    document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+    e.target.classList.add("active");
+    renderTab(e.target.dataset.tab);
+  }
+});
+
+// Reply inline
+container.addEventListener("click",e=>{
+  if(e.target.classList.contains("reply-btn")){
+    const index=e.target.dataset.index;
+    const existing=document.querySelector(`#replybox-${index}`);
+    if(existing){existing.remove();return;}
+    const box=document.createElement("div");
+    box.className="reply-box";
+    box.id=`replybox-${index}`;
+    box.innerHTML=`<input type="text" placeholder="Reply to ${notifications[index].user}...">`;
+    e.target.insertAdjacentElement("afterend",box);
+    const input=box.querySelector("input");
+    input.focus();
+    input.addEventListener("keypress",ev=>{
+      if(ev.key==="Enter"&&input.value.trim()!==""){
+        const replyText=input.value.trim();
+        const replyList=document.getElementById(`replies-${index}`)||(()=>{
+          const newList=document.createElement("div");
+          newList.className="reply-list";
+          newList.id=`replies-${index}`;
+          e.target.insertAdjacentElement("afterend",newList);
+          return newList;
+        })();
+        const replyItem=document.createElement("div");
+        replyItem.className="reply-item";
+        replyItem.textContent=`↳ ${replyText}`;
+        replyList.appendChild(replyItem);
+        input.value="";
+      }
+    });
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PolyPals AI Assistant</title>
+  <link rel="stylesheet" href="ai_chat.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Top bar -->
+  <div class="ai-top">
+    <i class="fa fa-arrow-left" onclick="window.history.back()"></i>
+    <h2>PolyPals AI 🤖</h2>
+    <i class="fa fa-magic sparkle"></i>
+  </div>
+
+  <!-- Chat body -->
+  <div class="ai-body" id="aiBody">
+    <div class="ai-msg bot">
+      👋 Hi! I’m your AI buddy. Ask me anything — or click ✨ for a magic suggestion.
+    </div>
+  </div>
+
+  <!-- Bottom input -->
+  <div class="ai-bottom">
+    <input type="text" id="aiInput" placeholder="Ask me something...">
+    <button id="aiSend"><i class="fa fa-paper-plane"></i></button>
+  </div>
+
+  <!-- Floating tools -->
+  <div class="ai-tools">
+    <button class="tool-btn" id="summarizeBtn" title="Summarize"><i class="fa fa-list"></i></button>
+    <button class="tool-btn" id="translateBtn" title="Translate"><i class="fa fa-language"></i></button>
+    <button class="tool-btn" id="replyBtn" title="Auto Reply"><i class="fa fa-reply"></i></button>
+  </div>
+
+  <!-- ✅ Firebase SDK (correct order) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-functions.js"></script>
+
+<!-- ✅ your config -->
+<script src="../../firebase-config.js"></script>
+
+<!-- ✅ finally your script -->
+<script src="ai_chat.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+/* spacing so content won't hide behind global navs */
+body { padding-bottom: 70px; }
+
+/* categories */
+.categories {
+  display:flex; gap:8px; padding:12px; overflow-x:auto;
+}
+.categories .cat {
+  padding:6px 12px; border-radius:20px; border:none; cursor:pointer; background:#f2f2f2;
+}
+.categories .cat.active { background:#6C63FF; color:#fff; }
+
+/* search */
+.search-bar { display:flex; gap:6px; padding:12px; }
+.search-bar input {
+  flex:1; padding:10px; border-radius:10px; border:1px solid #ddd; outline:none;
+}
+.search-bar button {
+  background:#6C63FF; color:#fff; border:none; border-radius:10px; padding:0 14px; cursor:pointer;
+}
+
+/* store cards */
+.store-list { padding: 15px; }
+.store-card {
+  display:flex; align-items:center; gap:12px;
+  background:#fff; border-radius:12px; padding:12px; margin-bottom:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+.store-card img {
+  width:70px; height:70px; border-radius:8px; object-fit:cover;
+}
+.visit-btn {
+  display:inline-block; margin-top:6px;
+  background:#6C63FF; color:#fff; text-decoration:none;
+  padding:6px 10px; border-radius:8px;
+}
+
+.cart-link {
+  position: relative;
+  font-size: 1.4rem;
+  color: #fff; /* white for contrast */
+}
+
+.cart-count {
+  position: absolute;
+  top: -6px; right: -10px;
+  background: #ff3b30; /* red badge */
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 2px 6px;
+  line-height: 1;
+  display: none;
+}

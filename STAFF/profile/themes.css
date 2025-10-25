@@ -1,0 +1,308 @@
+/* Background */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #414149, #464653);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* Banner */
+.theme-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(
+    270deg,
+    #4B2CFF,
+    #6C63FF,
+    #9D4EDD,
+    #B388FF,
+    #6C63FF
+  );
+  background-size: 600% 600%;
+  animation: gradientMove 8s ease infinite;
+
+  backdrop-filter: blur(6px);
+  border-radius: 0 0 30px 30px; /* only bottom-left & bottom-right */
+  padding: 12px 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+  height: 60px; /* slim */
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Banner left */
+.banner-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 2;
+}
+
+/* Back button */
+.back-btn {
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.back-btn:hover {
+  background: #fff;
+  color: #4B2CFF;
+  transform: scale(1.1);
+}
+
+/* Banner text */
+.banner-text h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.banner-text p {
+  font-size: 12px;
+  color: rgba(255,255,255,0.9);
+  margin: 2px 0 0;
+}
+
+/* Banner right (marquee) */
+.banner-right {
+  flex: 1;
+  overflow: hidden;
+  margin-left: 30px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}
+
+.marquee {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scroll-left 15s linear infinite;
+}
+
+.marquee:hover {
+  animation-play-state: paused;
+}
+
+.marquee span {
+  display: inline-block;
+  padding-right: 60px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.marquee .highlight {
+  font-weight: 700;
+  color: #FFD700;
+  text-shadow: 0 0 6px rgba(255, 215, 0, 0.8);
+}
+
+/* Marquee animation */
+@keyframes scroll-left {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(-100%); }
+}
+
+
+/* Videos in cards */
+.theme-card {
+  position: relative;
+  overflow: hidden;
+}
+.preview-video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+/* Back button */
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  border-radius: 50%;
+  width: 36px; height: 36px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.back-btn:hover { transform: rotate(-20deg) scale(1.1); background: rgba(255,255,255,0.25); }
+
+/* Sections */
+.themes-section { padding: 20px; }
+.section-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 12px;
+}
+.section-header h2 { margin: 0; font-size: 1.2rem; }
+
+/* Row */
+.themes-row {
+  display: flex; gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+.themes-row::-webkit-scrollbar { display: none; }
+
+/* Cards */
+.theme-card {
+  flex: 0 0 220px;
+  height: 150px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  transition: transform .3s, box-shadow .3s;
+}
+.theme-card:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0,229,255,0.4); }
+.card-footer {
+  position: absolute; bottom: 0; width: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  padding: 10px;
+}
+.badge, .badge-locked {
+  position: absolute; top: 8px; left: 8px;
+  padding: 2px 8px; border-radius: 8px;
+  font-size: 0.7rem;
+}
+.badge { background: linear-gradient(90deg, #00e5ff, #8f3cff); }
+.badge-locked { background: rgba(255,255,255,0.2); color: #bbb; }
+
+.btn {
+  background: linear-gradient(135deg, #8f3cff, #00e5ff);
+  border: none; padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn:hover { box-shadow: 0 0 10px rgba(0,229,255,0.6); }
+.btn-ghost { background: rgba(255,255,255,0.15); }
+
+/* Preview Overlay */
+.preview {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 1000;
+}
+.preview.hidden { display: none; }
+.mock-app {
+  width: 360px; height: 640px;
+  background: rgba(25,25,35,0.95);
+  border-radius: 20px;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  animation: slideUp .5s ease;
+}
+@keyframes slideUp { from{transform:translateY(50px); opacity:0;} to{transform:translateY(0); opacity:1;} }
+.mock-top, .mock-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 15px;
+  background: rgba(0,0,0,0.4);
+}
+.mock-logo { font-weight: 700; }
+.mock-feed { flex: 1; padding: 10px; display: flex; flex-direction: column; gap: 10px; }
+.mock-post { height: 80px; background: rgba(255,255,255,0.08); border-radius: 12px; }
+.mock-actions { display: flex; gap: 10px; justify-content: center; padding: 10px; }
+
+/* ---------- Tablet (iPad, Galaxy Tab) ---------- */
+@media (max-width: 1024px) {
+  .themes-row {
+    display: flex;
+    overflow-x: auto;
+    gap: 14px;
+    scroll-snap-type: x mandatory;
+  }
+  .theme-card {
+    flex: 0 0 200px;
+    height: 140px;
+    scroll-snap-align: start;
+  }
+
+  /* iPad mockup frame */
+  .mock-app {
+    width: 320px;
+    height: 520px;
+    border: 8px solid #ccc;
+    border-radius: 28px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    position: relative;
+  }
+  .mock-app::before {
+    content: "";
+    position: absolute;
+    top: -20px; left: 50%;
+    transform: translateX(-50%);
+    width: 60px; height: 6px;
+    border-radius: 3px;
+    background: #999; /* top camera bar */
+  }
+}
+
+/* ---------- Mobile (iPhone 16, Honor Magic, Samsung S Series) ---------- */
+@media (max-width: 768px) {
+  .themes-row {
+    display: flex;
+    overflow-x: auto;
+    gap: 12px;
+    scroll-snap-type: x mandatory;
+  }
+  .theme-card {
+    flex: 0 0 85%;
+    height: 150px;
+    scroll-snap-align: center;
+  }
+
+  /* iPhone-style mockup frame */
+  .mock-app {
+    width: 100%;
+    height: 95%;
+    border: 6px solid #222;
+    border-radius: 36px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+    position: relative;
+  }
+  .mock-app::before {
+    content: "";
+    position: absolute;
+    top: -6px; left: 50%;
+    transform: translateX(-50%);
+    width: 100px; height: 18px;
+    background: #222;
+    border-radius: 0 0 12px 12px; /* notch */
+  }
+}
+
+/* ---------- Small phones (<= 400px width) ---------- */
+@media (max-width: 400px) {
+  .theme-card {
+    flex: 0 0 90%;
+    height: 130px;
+  }
+  .mock-app {
+    border-radius: 28px;
+  }
+}

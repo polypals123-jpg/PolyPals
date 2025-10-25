@@ -1,0 +1,66 @@
+/* spacing for global navs */
+body { padding-bottom: 70px; }
+
+/* banner */
+.store-banner img { width:100%; height:180px; object-fit:cover; }
+
+/* seller card */
+.seller-card{
+  display:flex; gap:15px; align-items:center;
+  background:#fff; margin:15px; padding:15px; border-radius:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+.seller-card img{ width:80px; height:80px; border-radius:10px; object-fit:cover; }
+.seller-info h3{ margin:0; color:#6C63FF; }
+.qr-btn{
+  background:#6C63FF; color:#fff; border:none; border-radius:20px;
+  padding:6px 12px; cursor:pointer; margin-top:6px;
+}
+
+/* products */
+.product-list{ padding:15px; display:flex; flex-direction:column; gap:12px; }
+.product-row{
+  display:flex; gap:12px; align-items:center;
+  background:#fff; padding:12px; border-radius:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+.product-row img{ width:100px; height:100px; border-radius:10px; object-fit:cover; }
+.product-info{ flex:1; }
+.product-info h3{ margin:0; font-size:1rem; }
+.product-info .desc{ margin:5px 0; font-size:.9rem; color:#666; }
+.product-info .price{ margin:6px 0; color:#6C63FF; font-weight:700; }
+.stock{ font-size:.85rem; color:#888; }
+.add-to-cart{
+  background:linear-gradient(135deg,#6C63FF,#5145cd); color:#fff;
+  border:none; border-radius:20px; padding:6px 12px; cursor:pointer;
+}
+
+/* QR modal */
+.qr-modal{
+  display:none; position:fixed; inset:0; background:rgba(0,0,0,.6);
+  justify-content:center; align-items:center; z-index:2000;
+}
+.qr-content{
+  background:#fff; padding:20px; border-radius:12px; width:300px; text-align:center; position:relative;
+}
+.qr-content img{ width:200px; margin:10px 0; }
+.qr-content .close{ position:absolute; right:15px; top:10px; font-size:1.4rem; cursor:pointer; }
+
+.cart-link {
+  position: relative;
+  font-size: 1.4rem;
+  color: #fff; /* white for contrast */
+}
+
+.cart-count {
+  position: absolute;
+  top: -6px; right: -10px;
+  background: #ff3b30; /* red badge */
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 2px 6px;
+  line-height: 1;
+  display: none;
+}

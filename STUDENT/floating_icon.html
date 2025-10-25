@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Floating Action Button - PolyPals</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+.fixed-action-btn {
+  position: fixed;
+  bottom: 85px;
+  right: 25px;
+  z-index: 9999;
+}
+
+/* Main Button (+) */
+.main-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #6C63FF, #9D4EDD);
+  box-shadow: 0 4px 20px rgba(108, 99, 255, 0.4);
+  color: white;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+.main-btn:hover { transform: rotate(45deg); }
+
+/* Sub-buttons container */
+.fab-options {
+  position: absolute;
+  bottom: 70px;
+  right: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+/* Each sub-button */
+/* Each sub-button */
+.fab-options a {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  color: white;
+  font-size: 22px;
+  overflow: hidden;
+  box-shadow: none;
+  outline: none;
+  background-clip: padding-box;
+  transition: transform 0.25s ease, filter 0.25s ease;
+  /* ✨ ADD THIS LINE ✨ */
+  text-decoration: none;
+}
+
+/* 💫 Gradient Colors */
+/* CLASSIC & ELEGANT COLOR PALETTE */
+/* BRIGHTER CLASSIC & ELEGANT COLOR PALETTE */
+/* BRIGHTER CLASSIC & ELEGANT COLOR PALETTE */
+.fab-ai     { background: linear-gradient(135deg, #E63946, #A5002D); } /* Coral Red to Crimson */
+.fab-search { background: linear-gradient(135deg, #48D1CC, #005A50); } /* Turquoise to Forest Green */
+.fab-bell   { background: linear-gradient(135deg, #FFD700, #B8860B); } /* Gold to Bronze */
+.fab-chat   { background: linear-gradient(135deg, #4169E1, #192A56); } /* Royal Blue to Navy */
+
+
+/* Icon inside the button — ICON ONLY MODE */
+.fab-options a i {
+  font-size: 22px;
+  color: #fff;
+  line-height: 1;                /* perfectly centered */
+  transform: none;               /* no extra offset */
+  position: static;              /* reset any positioning */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hover */
+.fab-options a:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
+/* Active */
+.fixed-action-btn.active .fab-options {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(-10px);
+}
+
+/* Floating animation for main button */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.main-btn {
+  animation: float 3s ease-in-out infinite;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Floating Action Button -->
+  <div class="fixed-action-btn">
+    <button class="main-btn" id="mainFab"><i class="fa-solid fa-plus"></i></button>
+    <div class="fab-options">
+      <a href="aiquiz.html" class="fab-ai" title="AI Quiz"><i class="fa-solid fa-robot"></i></a>
+      <a href="../search.html" class="fab-search" title="Search"><i class="fa-solid fa-magnifying-glass"></i></a>
+      <a href="../notification.html" class="fab-bell" title="Notifications"><i class="fa-solid fa-bell"></i></a>
+      <a href="../chat/chat_hub.html" class="fab-chat" title="Chat"><i class="fa-solid fa-comments"></i></a>
+    </div>
+  </div>
+
+  <script>
+    const fab = document.querySelector('.fixed-action-btn');
+    const mainFab = document.getElementById('mainFab');
+
+    mainFab.addEventListener('click', () => {
+      fab.classList.toggle('active');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!fab.contains(e.target)) fab.classList.remove('active');
+    });
+  </script>
+</body>
+</html>

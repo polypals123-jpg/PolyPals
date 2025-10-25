@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PolyPals Chat</title>
+
+  <link rel="stylesheet" href="chat.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- ✅ Firebase v8 -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+  <script src="../../firebase-config.js"></script>
+</head>
+<body>
+
+  <!-- 🔝 Top Navigation -->
+  <div class="chat-top">
+    <div class="left">
+      <i class="fa fa-arrow-left" onclick="window.history.back()"></i>
+      <img id="chatUserPic" src="https://i.pravatar.cc/45" alt="User">
+      <div>
+        <div class="name" id="chatUserName">Loading...</div>
+        <div class="status" id="chatUserPoly">-</div>
+      </div>
+    </div>
+    <div class="icons">
+      <i class="fa fa-info-circle" id="infoBtn"></i>
+    </div>
+  </div>
+
+  <!-- 💬 Chat Messages -->
+  <div class="chat-body" id="chatBody">
+    <div id="loadingMessages" style="text-align:center;padding:15px;color:#888;">
+      Loading messages...
+    </div>
+  </div>
+
+  <!-- 📨 Input Area -->
+  <div class="chat-bottom">
+  <i class="fa fa-paperclip attach-btn" id="attachBtn"></i>
+  <input type="text" id="messageInput" placeholder="Type a message..." />
+  <button id="sendBtn" class="send-btn"><i class="fa fa-paper-plane"></i></button>
+  <input type="file" id="fileInput" accept="image/*,.pdf,.docx,.zip" hidden>
+</div>
+
+
+<!-- 📘 Sidebar for User Info -->
+<div class="user-sidebar" id="userSidebar">
+  <div class="sidebar-header">
+    <h3>User Info</h3>
+    <i class="fa fa-times" id="closeSidebar"></i>
+  </div>
+
+  <div class="sidebar-body">
+    <div class="user-card">
+      <img id="sideUserPic" src="../img/default-avatar.png" width="100" height="100" alt="User Pic">
+      <h3 id="sideUserName">Loading...</h3>
+      <p id="sideUserPoly" style="color:#666;font-size:13px;">Polytechnic</p>
+    </div>
+
+    <hr style="margin:15px 0;border:none;height:1px;background:#eee;">
+
+    <h4>📷 Shared Media</h4>
+    <div class="media-grid" id="mediaGrid"></div>
+  </div>
+</div>
+
+
+  <!-- ✅ JS -->
+  <script src="chat.js"></script>
+</body>
+</html>

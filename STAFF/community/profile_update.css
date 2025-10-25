@@ -1,0 +1,126 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #4B2CFF, #6C63FF, #9D4EDD, #00BFA6);
+  background-size: 400% 400%;
+  animation: gradientShift 10s ease infinite;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.update-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  padding: 30px;
+  width: 400px;        /* fixed width */
+  color: #fff;
+  margin: 0 15px;      /* equal margin left-right */
+}
+
+.update-card h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form input,
+form select,
+form textarea,
+form button {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;  /* 🔑 keep sizes equal */
+  margin-bottom: 15px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+}
+
+form input,
+form textarea {
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+form select {
+  background: #fff;     /* white dropdown */
+  color: #333;
+}
+
+form textarea {
+  resize: none;
+  min-height: 100px;   /* a bit taller */
+}
+
+form input::placeholder,
+form textarea::placeholder {
+  color: rgba(255,255,255,0.7);
+}
+
+form button {
+  background: linear-gradient(90deg, #4B2CFF, #00BFA6);
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  border: none;
+}
+
+form button:hover {
+  transform: scale(1.05);
+}
+
+:root {
+  --green: #1ECD97;
+  --gray: #bbbbbb;
+}
+
+/* Button Container aligned with form */
+.container {
+  width: 100%;            /* same width as inputs */
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+/* Animated Button same width as inputs */
+#submitBtn {
+  outline: none;
+  height: 45px;
+  width: 100%;            /* take full width */
+  max-width: 100%;        /* stay consistent */
+  border-radius: 12px;    /* match input corners */
+  background: #fff;
+  border: 2px solid var(--green);
+  color: var(--green);
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+#submitBtn:hover {
+  color: white;
+  background: var(--green);
+}
+
+#submitBtn:after {
+  content: "SAVE PROFILE";  /* updated label */
+}
+
+

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Join Group | PolyPals</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'Poppins',sans-serif;}
+    body{
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:linear-gradient(135deg,#6C63FF,#9D4EDD);
+      color:white;
+    }
+    .invite-container{
+      background:rgba(255,255,255,0.1);
+      padding:35px 30px;
+      border-radius:20px;
+      text-align:center;
+      width:320px;
+      backdrop-filter:blur(10px);
+      box-shadow:0 8px 25px rgba(0,0,0,0.25);
+      animation:pop 0.4s ease;
+    }
+    @keyframes pop{
+      from{transform:scale(0.8);opacity:0}
+      to{transform:scale(1);opacity:1}
+    }
+    .group-icon{
+      width:100px;
+      height:100px;
+      border-radius:50%;
+      object-fit:cover;
+      border:3px solid rgba(255,255,255,0.6);
+      margin-bottom:15px;
+      box-shadow:0 4px 15px rgba(0,0,0,0.2);
+    }
+    h2{margin-bottom:8px;font-size:22px;font-weight:600;}
+    p{font-size:14px;opacity:0.9;margin-bottom:15px;}
+    .join-btn{
+      background:white;
+      color:#6C63FF;
+      border:none;
+      border-radius:30px;
+      padding:10px 24px;
+      font-weight:600;
+      cursor:pointer;
+      font-size:15px;
+      transition:all 0.3s ease;
+      box-shadow:0 4px 15px rgba(255,255,255,0.2);
+    }
+    .join-btn:hover{
+      background:#f2f2f2;
+      transform:translateY(-2px);
+    }
+    .disabled{
+      opacity:0.6;
+      pointer-events:none;
+    }
+    .status{
+      margin-top:12px;
+      font-size:13px;
+      opacity:0.9;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="invite-container">
+    <img id="groupIcon" src="https://placehold.co/100x100/6C63FF/FFF?text=G"
+         alt="Group Icon" class="group-icon">
+    <h2 id="groupName">Loading group...</h2>
+    <p id="groupDesc">Please wait while we fetch group info.</p>
+    <button id="joinBtn" class="join-btn">
+      <i class="fa fa-user-plus"></i> Join Group
+    </button>
+    <div id="statusMsg" class="status"></div>
+  </div>
+
+  <!-- Firebase v8 -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+  <script src="../../firebase-config.js"></script>
+
+  <script>
+    const db = firebase.firestore();
+
+    // =========================================
+    // 🌐 Extract query params
+    // =========================================
+    const url = new URL(window.location.href);
+    const polyId = url.searchParams.get("polyId");
+    const groupId = url.searchParams.get("groupId");
+    const currentUid = localStorage.getItem("userUID");
+    const currentRole = (localStorage.getItem("userRole") || "student").toLowerCase();
+    const currentPoly = localStorage.getItem("userHomePolyId"); // ✅ correct session key
+
+    const groupNameEl = document.getElementById("groupName");
+    const groupDescEl = document.getElementById("groupDesc");
+    const groupIconEl = document.getElementById("groupIcon");
+    const joinBtn = document.getElementById("joinBtn");
+    const statusMsg = document.getElementById("statusMsg");
+
+    // =========================================
+    // 📦 Load group info
+    // =========================================
+    async function loadGroup() {
+      if (!polyId || !groupId) {
+        groupNameEl.textContent = "Invalid link ⚠️";
+        groupDescEl.textContent = "This invitation is missing parameters.";
+        joinBtn.classList.add("disabled");
+        return;
+      }
+
+      try {
+        const doc = await db.collection("polys").doc(polyId)
+          .collection("groups").doc(groupId).get();
+
+        if (!doc.exists) {
+          groupNameEl.textContent = "Group not found ❌";
+          groupDescEl.textContent = "This invitation might be expired.";
+          joinBtn.classList.add("disabled");
+          return;
+        }
+
+        const data = doc.data();
+        groupNameEl.textContent = data.groupName || "Unnamed Group";
+        groupDescEl.textContent = data.groupDesc || "No description.";
+        groupIconEl.src = data.groupIcon ||
+          `https://placehold.co/100x100/6C63FF/FFF?text=${(data.groupName||'G')[0]}`;
+
+        // check if already member
+        if (data.members?.some(m => (typeof m === "object" ? m.uid === currentUid : m === currentUid))) {
+          joinBtn.textContent = "✅ Joined";
+          joinBtn.classList.add("disabled");
+          statusMsg.textContent = "You’re already a member of this group.";
+        }
+
+      } catch (err) {
+        console.error("❌ loadGroup error:", err);
+        groupNameEl.textContent = "Error loading group";
+      }
+    }
+
+    // =========================================
+    // 👥 Join group (with UID, poly, role)
+    // =========================================
+    joinBtn.addEventListener("click", async () => {
+      if (!currentUid) {
+        alert("⚠️ Please log in to join the group.");
+        return;
+      }
+
+      joinBtn.disabled = true;
+      joinBtn.textContent = "Joining...";
+
+      try {
+        const memberObj = {
+          uid: currentUid,
+          polyId: currentPoly,
+          role: currentRole,
+        };
+
+        const groupRef = db.collection("polys").doc(polyId)
+          .collection("groups").doc(groupId);
+
+        await groupRef.update({
+          members: firebase.firestore.FieldValue.arrayUnion(memberObj)
+        });
+
+        // ✅ Also store in user's personal group collection
+        await db.collection("users").doc(currentUid)
+          .collection("groups").doc(groupId)
+          .set({
+            polyId,
+            groupId,
+            role: currentRole,
+            joinedAt: firebase.firestore.FieldValue.serverTimestamp()
+          }, { merge: true });
+
+        statusMsg.textContent = "🎉 You’ve joined successfully!";
+        joinBtn.textContent = "✅ Joined";
+
+        setTimeout(() => {
+        // ✅ Store group details for reference
+        localStorage.setItem("groupID", groupId);
+        localStorage.setItem("groupPolyId", polyId);
+
+        // ✅ Show a quick success message
+        statusMsg.textContent = "🎉 Joined successfully! You can now close this tab.";
+        joinBtn.classList.add("disabled");
+
+        // ✅ Close this invite tab after a short delay
+        setTimeout(() => {
+          window.close();
+        }, 1200);
+      }, 800);
+
+
+      } catch (err) {
+        console.error("❌ join error:", err);
+        alert("Failed to join group. Check console.");
+        joinBtn.disabled = false;
+        joinBtn.textContent = "Join Group";
+      }
+    });
+
+    loadGroup();
+  </script>
+</body>
+</html>

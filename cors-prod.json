@@ -1,0 +1,7 @@
+[
+  {
+    "origin": ["https://polypals.web.app", "https://www.polypals.com"],
+    "method": ["GET", "POST", "PUT", "DELETE", "HEAD"],
+    "maxAgeSeconds": 3600
+  }
+]

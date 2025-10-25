@@ -1,0 +1,356 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-image: url("../img/poly.png");
+  background-repeat: no-repeat;
+  color: white;
+  background-size: fixed;
+}
+
+.box {
+  background-color: transparent ;
+  width: 530px;
+  height: 650px;
+  perspective: 1000px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 110%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* .box:hover .flip-card-inner {
+            transform: rotateY(-180deg);
+        } */
+
+.box-login,
+.box-signup {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.box-login {
+  width: 100%;
+  height: 100%;
+  font-size: 1.5rem;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25px;
+  box-sizing: border-box;
+  backdrop-filter: blur(10px);
+  /* border: 1px solid white; */
+  position: absolute;
+}
+
+.box-login h1 {
+  letter-spacing: 2px;
+}
+
+.box-signup h2 {
+  padding-top: 1px;
+  letter-spacing: 2px;
+}
+
+.box-login ul {
+  padding: 26px;
+}
+
+.box-signup ul {
+  padding: 10px;
+}
+
+.box-login .inpt {
+  width: 27rem;
+  padding: 15px 10px;
+  font-size: 1.4rem;
+  border-radius: 15px;
+  margin: 15px;
+  background: transparent;
+  outline: none;
+}
+
+input::placeholder {
+  color: white;
+  font-size: 1.2rem;
+}
+
+.btn {
+  height: 3.2rem;
+  width: 27rem;
+  margin: 15px 15px 0 15px;
+  padding: 10px;
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+  border-radius: 50px;
+  background: white;
+  color: black;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-0.4rem);
+}
+
+.box-login form a {
+  text-decoration: none;
+  color: white;
+  padding-left: 150px;
+  font-size: 1rem;
+}
+
+label {
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.box-signup {
+  color: white;
+  transform: rotateY(180deg);
+  width: 100%;
+  height: 100%;
+  font-size: 1.5rem;
+  text-align: center;
+  background: transparent;
+  display: flex;
+  flex-direction: column;flex-direction: column;flex-direction: column;flex-direction: column;flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25px;
+  backdrop-filter: blur(10px);
+  position: absolute;
+}
+
+.box input {
+  color: white;
+  border-radius: 0px;
+  border: 1px solid white;
+  /* border-bottom-color:white ; */
+  /* padding: 20px 10px; */
+  /* transition: 0.3s ease; */
+}
+
+.box input:focus{
+    border: 2px solid cyan;
+}
+
+.box-signup .inpt {
+  width: 27rem;
+  padding: 15px;
+  font-size: 1.2rem;
+  border-radius: 15px;
+  margin: 10px;
+  background: transparent;
+  transition: 0.5s ease;
+  outline: none;
+}
+
+.box-signup form a {
+  /* display: flex; */
+  text-align: right;
+  text-decoration: none;
+  color: white;
+  padding-left: 155px;
+  font-size: 1rem;
+  /* transition: 0.5s ease; */
+}
+
+form a:active {
+  color: blueviolet;
+}
+
+.box-login .register-link {
+  font-size: 1rem;
+  /* margin-bottom: rem; */
+  padding-bottom: 15px;
+  font-style: italic;
+}
+
+.box-signup .register-link {
+  font-size: 1rem;
+  /* margin-bottom: 3rem; */
+  padding-bottom: 30px;
+  font-style: italic;
+}
+
+.register-link a {
+  color: blueviolet;
+  transition: 0.5s ease;
+}
+
+.register-link a:active {
+  color: blue;
+}
+
+.register-link a:hover {
+  color: red;
+  transform: scale(1.5);
+}
+
+/* Match polyselect <select> with input.inpt */
+.polyselect select.inpt {
+  width: 29rem;
+  padding: 15px;
+  font-size: 1.2rem;
+  border-radius: 15px;
+  margin: 10px;
+  background: transparent;
+  color: white;
+  border: 1px solid white;
+  outline: none;
+  appearance: none;          /* remove default dropdown arrow */
+  -webkit-appearance: none;  /* for Safari */
+  -moz-appearance: none;     /* for Firefox */
+  transition: 0.5s ease;
+  cursor: pointer;
+  max-height: 100px;   /* adjust: 5 items * 30px each */
+  overflow-y: auto;
+}
+
+/* Dropdown text color */
+.polyselect select option {
+  background: #222; /* dark bg for dropdown */
+  color: white;
+  padding: 10px;
+}
+
+/* Hover/focus effect */
+.polyselect select.inpt:hover,
+.polyselect select.inpt:focus {
+  border-color: cyan;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+}
+
+/* Dropdown (inside select when opened) */
+.polyselect select option {
+  background: #111;
+  color: white;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+/* Limit visible options and make scrollable */
+.polyselect select {
+  max-height: 180px;  /* only show about 6 rows */
+  overflow-y: auto;   /* scrollbar inside dropdown */
+}
+
+.email-login i {
+  /* content: "\eee1"; */
+  position: absolute;
+  top: 16.8rem;
+  right: 3.6rem;
+  cursor: pointer;
+}
+
+.password-login i {
+  position: absolute;
+  right: 3.6rem;
+  top: 22.4rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.matric-signup i {
+  position: absolute;
+  right: 3.8rem;
+  top: 11rem;
+  cursor: pointer;
+}
+
+.staffid-signup i {
+  position: absolute;
+  right: 3.8rem;
+  top: 11rem;
+  cursor: pointer;
+}
+
+.ic-signup i {
+  position: absolute;
+  right: 3.6rem;
+  top: 15.7rem;
+  cursor: pointer;
+}
+
+.email-signup i {
+  top: 20.1rem;
+  position: absolute;
+  right: 3.6rem;
+  cursor: pointer;
+}
+
+.polyselect i {
+  top: 24.6rem;
+  position: absolute;
+  right: 3.6rem;
+  cursor: pointer;
+}
+
+.password-signup i {
+  top: 29.3rem;
+  position: absolute;
+  right: 3.7rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.reconfirm_password-signup i {
+  top: 34rem;
+  position: absolute;
+  right: 3.7rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+@media (max-width: 480px) {
+  .box {
+    width: 90%;
+  }
+
+  .box .inpt {
+    width: 85%;
+  }
+
+  .box form a {
+    padding-left: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .box-login ul {
+    padding: 5px;
+  }
+
+  .btn {
+    width: 80%;
+  }
+}
+
+@media (max-width: 480px) {
+  /* shorten the select field width slightly */
+  .polyselect select.inpt {
+    width: 95%;
+  }
+  /* make the placeholder text shorter for mobile */
+  .polyselect select.inpt option[disabled][selected][hidden]::after {
+    content: "Select Poly";
+  }
+}

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PolyPals - Student Community</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="community.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="nav">
+    <!-- Left: Logo and Name -->
+    <a class="brand" href="index.html">
+      <img src="../../img/logo.jpeg" alt="PolyPals logo">
+      <span class="brand__name">PolyPals</span>
+    </a>
+
+    <!-- Right: Chat icon -->
+    <div class="nav-right">
+      <div class="points-claim" id="claimPointsBtn" title="Daily Login Reward">
+        <i class="fa-solid fa-gift"></i>
+        <span class="points-badge" id="claimBadge">+2</span>
+      </div>
+  </header>
+
+  <!-- Feed Section -->
+  <main class="community">
+  <!-- Sidebar Left -->
+  <aside class="sidebar">
+    <div class="card">
+      <h3>📢 Notice</h3>
+      <p>Don’t forget to register for Sports Day 2025!</p>
+    </div>
+
+    <div class="card">
+      <h3>🏆 Top Contributors</h3>
+      <ol>
+        <li>👑 Syafiq</li>
+        <li>✨ Amira</li>
+        <li>🔥 Daniel</li>
+      </ol>
+    </div>
+
+    <div class="card">
+  <h3>📊 Daily Active Users</h3>
+  <canvas id="userChart"></canvas>
+</div>
+
+
+  </aside>
+
+  <!-- Main Feed Right -->
+  <section class="feed">
+    <div class="post-card">
+      <div class="post-header">
+        <img src="../../img/logo.jpeg" class="post-avatar">
+        <div>
+          <h4>HEP Office</h4>
+          <span>Posted 2h ago</span>
+        </div>
+      </div>
+      <div class="post-body">
+        <p>🚨 Reminder: Submit your course registration before 30 Sept.</p>
+        <img src="../../img/poly.png" class="post-media">
+      </div>
+      <div class="post-footer">
+        <button><i class="fa fa-thumbs-up"></i> Like</button>
+        <button><i class="fa fa-comment"></i> Comment</button>
+        <button><i class="fa fa-share"></i> Share</button>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-header">
+        <img src="../../img/logo.jpeg" class="post-avatar">
+        <div>
+          <h4>Jabatan PolyCC</h4>
+          <span>Posted 1d ago</span>
+        </div>
+      </div>
+      <div class="post-body">
+        <p>🎓 New program launched: Digital Entrepreneurship Bootcamp!</p>
+        <video class="post-media" controls>
+          <source src="../../img/lotus.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="post-footer">
+        <button><i class="fa fa-thumbs-up"></i> Like</button>
+        <button><i class="fa fa-comment"></i> Comment</button>
+        <button><i class="fa fa-share"></i> Share</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+<!-- Theme Video Background -->
+<div class="theme-video-container">
+  <video id="bgVideo" autoplay muted loop playsinline></video>
+</div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <a href="../community/community.html" class="nav-item active">
+      <i class="fa fa-users"></i><span>Community</span>
+    </a>
+    <a href="../home/home.html" class="nav-item">
+      <i class="fa fa-home"></i><span>Home</span>
+    </a>
+    <a href="../post/post.html" class="nav-item">
+      <i class="fa fa-plus-circle"></i><span>Post</span>
+    </a>
+    <a href="../shop/shop.html" class="nav-item">
+      <i class="fa fa-store"></i><span>Shop</span>
+    </a>
+    <a href="../profile/profile.html" class="nav-item">
+      <i class="fa fa-user"></i><span>Profile</span>
+    </a>
+  </nav>
+
+ <div id="loginPopup" class="popup-overlay" style="display: none;">
+    <div class="popup-box">
+      <h2>Login Required</h2>
+      <p>You must log in to access PolyPals.</p>
+      <button id="goLogin">Go to Login</button>
+    </div>
+  </div>
+
+
+</body>
+      <!-- Firebase SDKs (compat) -->
+      <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
+
+      <!-- Firebase config -->
+      <script src="../../firebase-config.js"></script>
+
+      <!-- Page scripts -->
+      <script src="../profile/profile.js"></script>
+      <script src="index.js"></script>   <!-- ❌ remove type="module" -->
+      <!-- Chart.js CDN -->
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const ctx = document.getElementById("userChart").getContext("2d");
+          new Chart(ctx, {
+            type: "line",
+            data: {
+              labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+              datasets: [{
+                label: "Active Users",
+                data: [120, 200, 180, 250, 300, 280, 350],
+                borderColor: "#6C63FF",
+                backgroundColor: "rgba(108,99,255,0.2)",
+                borderWidth: 2,
+                fill: true,
+                tension: 0.4
+              }]
+            },
+            options: {
+              responsive: true,
+              plugins: { legend: { display: false } },
+              scales: {
+                x: { ticks: { color: "#fff" } },
+                y: { ticks: { color: "#fff" } }
+              }
+            }
+          });
+        });
+        </script>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Receipt - PolyPals</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      display:flex; justify-content:center; align-items:center;
+      height:100vh; background:#f9f9f9; margin:0;
+    }
+    .receipt {
+      background:#fff; padding:20px 30px;
+      border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1);
+      width:340px;
+    }
+    .receipt h2 {
+      text-align:center; color:#6C63FF; margin-bottom:15px;
+    }
+    .receipt p { margin:6px 0; font-size:0.9rem; }
+    .highlight { font-weight:bold; color:#333; }
+    .status {
+      font-weight:bold; padding:3px 6px; border-radius:6px; font-size:0.85rem;
+    }
+    .confirmed { background:#25D366; color:#fff; }
+    .pending { background:#ff9500; color:#fff; }
+    button {
+      margin-top:15px; width:100%; padding:10px;
+      background:#6C63FF; color:#fff;
+      border:none; border-radius:8px; cursor:pointer;
+      font-size:0.9rem;
+    }
+    button:hover { background:#5145cd; }
+  </style>
+</head>
+<body>
+  <div class="receipt">
+    <h2>PolyPals Receipt</h2>
+    <p><span class="highlight">Order ID:</span> <span id="orderId">#12345</span></p>
+    <p><span class="highlight">Buyer:</span> <span id="buyerName">Ali</span></p>
+    <p><span class="highlight">Seller:</span> <span id="sellerName">Mak Cik’s Kitchen</span></p>
+    <p><span class="highlight">Product:</span> <span id="productName">Nasi Lemak x2</span></p>
+    <p><span class="highlight">Total:</span> RM<span id="orderTotal">10</span></p>
+    <p><span class="highlight">Date:</span> <span id="orderDate">27 Sept 2025</span></p>
+    <p><span class="highlight">Status:</span> <span id="orderStatus" class="status confirmed">Confirmed</span></p>
+    <button onclick="window.print()">Print / Save as PDF</button>
+  </div>
+
+  <script>
+    // ✅ Example: Fill receipt dynamically (later connect Firestore)
+    const orderData = {
+      orderId: "#98765",
+      buyer: "Siti",
+      seller: "Ali’s Burger Shack",
+      product: "Chicken Burger x1, Fries x1",
+      total: 12,
+      date: new Date().toLocaleDateString(),
+      status: "Waiting Seller Confirmation"
+    };
+
+    // Fill in fields
+    document.getElementById("orderId").textContent = orderData.orderId;
+    document.getElementById("buyerName").textContent = orderData.buyer;
+    document.getElementById("sellerName").textContent = orderData.seller;
+    document.getElementById("productName").textContent = orderData.product;
+    document.getElementById("orderTotal").textContent = orderData.total;
+    document.getElementById("orderDate").textContent = orderData.date;
+
+    const statusEl = document.getElementById("orderStatus");
+    statusEl.textContent = orderData.status;
+
+    // Style by status
+    if (orderData.status.includes("Confirmed")) {
+      statusEl.className = "status confirmed";
+    } else if (orderData.status.includes("Pending")) {
+      statusEl.className = "status pending";
+    } else {
+      statusEl.className = "status";
+    }
+  </script>
+</body>
+</html>

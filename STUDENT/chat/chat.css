@@ -1,0 +1,292 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #f6f7fb;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top nav */
+.chat-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #fff;
+}
+.chat-top .left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.chat-top img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* ===================================
+   💬 MODERN CHAT BUBBLE DESIGN
+=================================== */
+
+/* Chat body background */
+.chat-body {
+  flex: 1;
+  padding: 20px 16px 85px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #fafaff, #f3f1ff, #ffffff);
+}
+
+/* Base message bubble */
+.msg {
+  max-width: 75%;
+  margin: 8px 0;
+  padding: 10px 14px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.4;
+  word-wrap: break-word;
+  position: relative;
+  display: inline-block;
+  animation: fadeIn 0.25s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+/* Friend message (left) */
+.msg.friend {
+  align-self: flex-start;
+  background: #ffffff;
+  color: #222;
+  border: 1px solid #e5e5ef;
+  border-bottom-left-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.msg.friend:hover {
+  background: #f8f8ff;
+  transform: translateY(-1px);
+}
+
+/* Your message (right) */
+.msg.you {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #6C63FF, #9D4EDD);
+  color: #fff;
+  border-bottom-right-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.msg.you:hover {
+  box-shadow: 0 0 12px rgba(108, 99, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Timestamp inside corner of bubble */
+.timestamp {
+  font-size: 10px;
+  opacity: 0.7;
+  margin-top: 3px;
+  text-align: right;
+  pointer-events: none;
+}
+
+/* Subtle fade animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scrollbar polish */
+.chat-body::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-body::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #6C63FF, #9D4EDD);
+  border-radius: 10px;
+}
+.chat-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* =============================
+   📎 MEDIA + FILE PREVIEW
+============================= */
+.msg-media img {
+  max-width: 230px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+.msg-media img:hover {
+  transform: scale(1.03);
+}
+
+.msg-file {
+  background: #f3f1ff;
+  border: 1px solid #ddd3ff;
+  border-radius: 12px;
+  padding: 8px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  max-width: 240px;
+  word-break: break-all;
+}
+.msg-file i {
+  color: #6C63FF;
+  font-size: 18px;
+}
+.msg-file a {
+  text-decoration: none;
+  color: #6C63FF;
+  font-weight: 600;
+}
+.msg-file a:hover {
+  text-decoration: underline;
+}
+
+
+
+/* Bottom */
+.chat-bottom {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: #fff;
+  border-top: 1px solid #ddd;
+}
+.chat-bottom input {
+  flex: 1;
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  margin: 0 10px;
+}
+.chat-bottom i {
+  color: #6a11cb;
+  font-size: 20px;
+  cursor: pointer;
+}
+/* 🚀 Send Button */
+.chat-bottom .send-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  color: #000000;
+  background: linear-gradient(135deg, #6C63FF, #9D4EDD);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
+  transition: all 0.25s ease;
+}
+
+/* Sidebar */
+.user-sidebar {
+  position: fixed;
+  top: 0;
+  right: -350px;
+  width: 300px;
+  height: 100%;
+  background: #fff;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+  transition: right 0.3s ease;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #fff;
+}
+.sidebar-body {
+  padding: 15px;
+  overflow-y: auto;
+}
+.user-card {
+  text-align: center;
+}
+.user-card img {
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.media-grid img, .media-grid video {
+  width: 100%;
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
+.media-grid img:hover, .media-grid video:hover {
+  transform: scale(1.05);
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.file-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f6f3ff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  color: #6C63FF;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: 0.2s;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.file-link i {
+  font-size: 14px;
+}
+.file-link:hover {
+  background: #e8e4ff;
+  transform: translateY(-1px);
+}
+
+/* 🔗 Regular link inside messages */
+.msg-text a.msg-link {
+  color: #6C63FF;
+  text-decoration: none;
+  font-weight: 500;
+  word-break: break-all;
+  transition: 0.2s;
+}
+.msg-text a.msg-link:hover { color: #9D4EDD; text-decoration: underline; }
+
+/* 🪄 Invite "Join Group" button style */
+a.join-link {
+  display: inline-block;
+  background: linear-gradient(135deg,#6C63FF,#9D4EDD);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.25s;
+}
+a.join-link:hover { opacity: 0.85; transform: scale(1.05); }

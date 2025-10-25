@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Become a Seller - Poly Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Page CSS -->
+  <link rel="stylesheet" href="seller.css" />
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- Top Nav -->
+  <header class="page-header">
+  <a href="profile.html" class="back-btn"><i class="fa fa-arrow-left"></i></a>
+  <h2>Become a Seller</h2>
+  <span></span>
+</header>
+
+  <!-- Seller Form Card -->
+  <section class="seller-form">
+    <h2>Register Your Store</h2>
+    <form id="sellerForm">
+      <label>Store Name</label>
+      <input type="text" id="storeName" placeholder="e.g. Mak Cik’s Kitchen" required />
+
+      <label>Tagline / Short Description</label>
+      <input type="text" id="tagline" placeholder="e.g. Nasi lemak & kuih setiap pagi" />
+
+      <label>About Store (optional)</label>
+      <textarea id="about" rows="3" placeholder="Tell buyers about your store..."></textarea>
+
+      <div class="row-2">
+        <div>
+          <label>WhatsApp / Phone</label>
+          <input type="text" id="whatsapp" placeholder="60123456789" required />
+        </div>
+        <div>
+          <label>Category</label>
+          <select id="category">
+            <option value="Food">Food</option>
+            <option value="Clothes">Clothes</option>
+            <option value="Gadgets">Gadgets</option>
+            <option value="Others">Others</option>
+          </select>
+        </div>
+      </div>
+
+      <label>Account Holder Name</label>
+      <input type="text" id="accHolder" placeholder="e.g. Aminah Binti Ali" required />
+
+      <label>Upload Bank QR Image</label>
+      <input type="file" id="qrImage" accept="image/*" required />
+
+      <label>Upload Store Logo</label>
+      <input type="file" id="logo" accept="image/*" required/>
+
+      <!-- Upload Store Banner -->
+      <label for="storeBanner">Upload Store Banner</label>
+      <input type="file" id="storeBanner" accept="image/*" required/>
+
+      <button type="submit" class="submit-btn">
+        <i class="fa fa-store"></i> Become Seller
+      </button>
+    </form>
+  </section>
+
+<!-- ✅ Firebase SDK (v8 order) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+
+<!-- ✅ Your Firebase config -->
+<script src="../../firebase-config.js"></script>
+
+<!-- ✅ Page script -->
+<script src="seller.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,329 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #f6f7fb;
+  height: 100vh;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  margin-top: 5px;
+}
+.chat-toggle button {
+  flex: 1;
+  border: none;
+  background: #eee;
+  color: #555;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 25px;
+  padding: 8px 0;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+.chat-toggle button.active {
+  background: linear-gradient(135deg, #6C63FF, #9D4EDD);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(108,99,255,0.3);
+}
+.hidden { display: none !important; }
+
+/* Top bar */
+.chatmain-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #fff;
+}
+.chatmain-top h2 {
+  margin: 0;
+}
+.chatmain-top .icons i {
+  margin-left: 15px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.chatmain-top .icons i:hover {
+  transform: scale(1.2);
+}
+
+/* Section Titles */
+.section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+  padding: 8px 15px;
+  margin: 0;
+  background: #f0f2ff;
+  border-top: 1px solid #ddd;
+}
+
+/* AI Chat Glow */
+.chat-item.pinned {
+  background: #faf5ff;
+  border-left: 4px solid #6a11cb;
+}
+
+/* Existing chat-item styles still apply */
+
+/* Chat list */
+.chat-list {
+  flex: 1;
+  overflow-y: auto;
+  animation: slideIn 0.5s ease;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================================
+   💬 Chat List Item Layout Fix
+================================= */
+.chat-item {
+  display: flex;
+  align-items: center;
+  gap: 14px; /* ← this gives breathing room between image & text */
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.chat-item:hover {
+  background: rgba(108, 99, 255, 0.05);
+}
+
+.chat-item .chat-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.chat-item .chat-name {
+  font-weight: 700;
+  color: #111;
+  font-size: 15px;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+}
+
+.chat-item .chat-last {
+  color: #555;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* AI Chat special */
+.chat-item.pinned {
+  background: #faf5ff;
+  border-left: 4px solid #6a11cb;
+}
+.chat-item .chat-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+.chat-icon.ai-glow {
+  background: linear-gradient(135deg, #ff7eb3, #ff758c);
+  color: #fff;
+  animation: glow 2s infinite alternate;
+}
+@keyframes glow {
+  from { box-shadow: 0 0 5px #ff7eb3, 0 0 10px #ff758c; }
+  to { box-shadow: 0 0 20px #ff7eb3, 0 0 40px #ff758c; }
+}
+
+/* Personal chat */
+.chat-item img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.chat-info {
+  flex: 1;
+}
+.chat-name {
+  font-weight: 600;
+}
+.chat-last {
+  font-size: 13px;
+  color: #555;
+}
+.chat-time {
+  font-size: 12px;
+  color: #888;
+}
+.chat-unread {
+  position: absolute;
+  right: 15px;
+  bottom: 12px;
+  background: #ff4d6d;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 3px 7px;
+  border-radius: 12px;
+  animation: bounce 1s infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+/* ================================
+   👥 Group Icon — Final Polished Version
+================================= */
+.group-icon {
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #6C63FF, #9D4EDD);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 20px;
+  box-shadow: 0 3px 8px rgba(108, 99, 255, 0.25);
+  flex-shrink: 0;
+}
+
+/* ✅ For uploaded image icons */
+.group-icon img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* ✅ For text initials */
+.group-icon span {
+  z-index: 2;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.group-icon:hover {
+  box-shadow: 0 0 0 3px rgba(108,99,255,0.2);
+  transform: scale(1.03);
+  transition: 0.25s ease;
+}
+
+
+
+/* Existing styles remain... */
+
+/* Search bar */
+.chat-search {
+  display: none;
+  padding: 10px 15px;
+  background: #eef2ff;
+  animation: expandDown 0.4s ease forwards;
+}
+.chat-search input {
+  width: 90%;
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 14px;
+}
+@keyframes expandDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Funny "pulse" effect while typing */
+.typingPulse {
+  animation: pulse 0.4s infinite alternate;
+}
+@keyframes pulse {
+  from { transform: scale(1); color: #6a11cb; }
+  to { transform: scale(1.2); color: #2575fc; }
+}
+
+.search-results {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  max-height: 260px;
+  overflow-y: auto;
+  margin-top: 6px;
+  display: none;
+  position: relative;
+  z-index: 999;
+}
+
+.result-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.result-item:hover {
+  background: rgba(108,99,255,0.08);
+}
+
+.result-item img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.res-info small {
+  color: #777;
+}
+
+.poly-tag {
+  background: linear-gradient(135deg,#6C63FF,#9D4EDD);
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 11px;
+  margin-top: 3px;
+  display: inline-block;
+}
+
+.chat-item.unread {
+  background: rgba(108,99,255,0.1);
+  border-left: 4px solid #6C63FF;
+}
+
+.chat-item.unread .chat-last {
+  font-weight: 600;
+  color: #000;
+}

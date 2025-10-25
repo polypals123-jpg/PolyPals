@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Post - PolyPals</title>
+  <link rel="stylesheet" href="post.css">
+  <link rel="stylesheet" href="../community/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="post-container">
+    
+    <!-- Upload Section -->
+    <div class="glass-card post-box">
+      <textarea id="description" placeholder="Write a description..." maxlength="500"></textarea>
+      <div class="desc-tools">
+        <span id="charCount">0/500</span>
+        <button type="button" id="aiSuggest" class="ai-btn">
+          <i class="fa fa-magic"></i> Suggest Caption
+        </button>
+      </div>
+      <!-- AI Options -->
+      <div id="aiOptions" class="ai-options"></div>
+
+      <!-- Media Upload Zone -->
+      <div class="upload-zone" id="uploadZone">
+        <input type="file" id="mediaFile" accept="image/*,video/*">
+        <p><i class="fa fa-cloud-upload-alt"></i> Drag & Drop or Click to Upload</p>
+      </div>
+
+      <!-- Post Button -->
+      <button id="uploadPost" class="upload-btn">🚀 Publish Post</button>
+
+      <!-- Progress Bar -->
+      <div class="progress-box">
+        <div id="progressBar"></div>
+      </div>
+
+      <p class="tips">✨ Tip: Posts with images/videos get more attention!</p>
+    </div>
+
+    <!-- Preview Section -->
+    <div class="glass-card preview-box">
+      <h4 class="preview-title">Live Preview</h4>
+      <div class="post-card public-post" id="previewPost">
+        <div class="post-header">
+          <img id="previewPic" class="avatar" src="../../img/icon.png">
+          <div class="user-info">
+            <span id="previewName">Your Name <i class="fa fa-check-circle verified"></i></span>
+            <p id="previewCourse">Your Course · just now</p>
+          </div>
+          <div class="post-options">
+            <i class="fa fa-ellipsis-h"></i>
+            <ul class="options-menu">
+              <li><i class="fa fa-bookmark"></i> Save</li>
+              <li><i class="fa fa-flag"></i> Report</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Fixed preview area -->
+        <div class="fixed-media" id="previewMedia">
+          <span>No media selected</span>
+        </div>
+
+        <p class="post-desc" id="previewDesc">Your caption will appear here...</p>
+
+        <div class="post-actions">
+          <i class="fa-regular fa-heart like-btn"></i>
+          <i class="fa-regular fa-comment"></i>
+          <i class="fa-solid fa-share-nodes"></i>
+          <i class="fa-regular fa-bookmark save-btn"></i>
+        </div>
+
+        <div class="post-stats">
+          <span>0 Likes</span> · <span>0 Comments</span>
+        </div>
+      </div>
+    </div>
+
+
+
+  <!-- Bottom Nav -->
+  <nav class="bottom-nav">
+    <a href="../community/index.html" class="nav-item"><i class="fa fa-users"></i><span>Community</span></a>
+    <a href="../home/home.html" class="nav-item"><i class="fa fa-home"></i><span>Home</span></a>
+    <a href="../post/post.html" class="nav-item active"><i class="fa fa-plus-circle"></i><span>Post</span></a>
+    <a href="../shop/shop.html" class="nav-item"><i class="fa fa-shopping-bag"></i><span>Shop</span></a>
+    <a href="../profile/profile.html" class="nav-item"><i class="fa fa-user"></i><span>Profile</span></a>
+  </nav>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-functions-compat.js"></script>
+
+  <script src="../../firebase-config.js"></script>
+  <script src="post.js"></script>
+</body>
+</html>

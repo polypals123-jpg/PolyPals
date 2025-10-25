@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Poly Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Global top/bottom nav -->
+  <link rel="stylesheet" href="../community/style.css" />
+  <!-- Page CSS -->
+  <link rel="stylesheet" href="shop.css" />
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- Global top nav (do not change) -->
+  <div class="nav">
+    <a href="../community/index.html" class="brand">
+      <img src="../../img/logoo.png" alt="Logo" />
+      <span class="brand__name">PolyPals</span>
+    </a>
+    <a href="cart.html" class="cart-link">
+      <i class="fa fa-shopping-cart"></i>
+      <span class="cart-count">0</span>
+    </a>
+  </div>
+
+  <!-- Categories -->
+  <div class="categories">
+    <button class="cat active" data-filter="all">All</button>
+    <button class="cat" data-filter="Food">Food 🍛</button>
+    <button class="cat" data-filter="Clothes">Clothes 👕</button>
+    <button class="cat" data-filter="Gadgets">Gadgets 📱</button>
+    <button class="cat" data-filter="Others">Others</button>
+  </div>
+
+  <!-- Search -->
+  <div class="search-bar">
+    <input id="searchInput" type="text" placeholder="Search stores..." />
+    <button id="searchBtn"><i class="fa fa-search"></i></button>
+  </div>
+
+  <!-- Store List -->
+  <section class="store-list" id="storeList">
+    <!-- demo stores -->
+    <div class="store-card" data-category="Food" data-name="Mak Cik’s Kitchen">
+      <img src="../../img/logo.jpeg" alt="Seller Logo" />
+      <div class="store-info">
+        <h3>Mak Cik’s Kitchen</h3>
+        <p>Delicious nasi lemak & kuih.</p>
+        <a href="store.html?id=abc123" class="visit-btn"><i class="fa fa-store"></i> Visit Store</a>
+      </div>
+    </div>
+
+    <div class="store-card" data-category="Food" data-name="Ali’s Burger Shack">
+      <img src="../../img/store2.jpeg" alt="Seller Logo" />
+      <div class="store-info">
+        <h3>Ali’s Burger Shack</h3>
+        <p>Burgers & fries made fresh.</p>
+        <a href="store.html?id=xyz456" class="visit-btn"><i class="fa fa-store"></i> Visit Store</a>
+      </div>
+    </div>
+
+    <div class="store-card" data-category="Gadgets" data-name="Tech Corner">
+      <img src="../../img/store3.jpeg" alt="Seller Logo" />
+      <div class="store-info">
+        <h3>Tech Corner</h3>
+        <p>Chargers, cables, and more.</p>
+        <a href="store.html?id=gad321" class="visit-btn"><i class="fa fa-store"></i> Visit Store</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Global bottom nav (do not change) -->
+  <nav class="bottom-nav">
+    <a href="../community/community.html" class="nav-item"><i class="fa fa-users"></i><span>Community</span></a>
+    <a href="../home/home.html" class="nav-item"><i class="fa fa-home"></i><span>Home</span></a>
+    <a href="../post/post.html" class="nav-item"><i class="fa fa-plus-circle"></i><span>Post</span></a>
+    <a href="shop.html" class="nav-item active"><i class="fa fa-store"></i><span>Shop</span></a>
+    <a href="../profile/profile.html" class="nav-item"><i class="fa fa-user"></i><span>Profile</span></a>
+  </nav>
+
+  <script src="shop.js"></script>
+</body>
+</html>

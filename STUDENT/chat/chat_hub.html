@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PolyPals Chat Hub</title>
+
+  <link rel="stylesheet" href="../community/style.css">
+  <link rel="stylesheet" href="chat_hub.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- ✅ Firebase v8 SDK (same as home) -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+
+  <!-- ✅ your config in root -->
+  <script src="../../firebase-config.js"></script>
+</head>
+
+<body>
+
+  <!-- Top bar -->
+  <div class="chatmain-top">
+    <h2>Chats</h2>
+    <div class="icons">
+      <i class="fa fa-search" id="searchIcon"></i>
+      <i class="fa fa-user-plus" id="createGroup"></i>
+    </div>
+  </div>
+
+  <!-- Search bar -->
+  <div class="chat-search" id="chatSearch">
+    <input type="text" id="searchInput" placeholder="Search users...">
+  </div>
+
+  <!-- Chat list (dynamic) -->
+  <div id="chatList" class="chat-list"></div>
+<div id="groupList" class="chat-list"></div>
+
+    <!-- Real chat items will be loaded here dynamically from Firestore -->
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <a href="../community/index.html" class="nav-item">
+      <i class="fa fa-users"></i><span>Community</span>
+    </a>
+    <a href="../home/home.html" class="nav-item">
+      <i class="fa fa-home"></i><span>Home</span>
+    </a>
+    <a href="../post/post.html" class="nav-item">
+      <i class="fa fa-plus-circle"></i><span>Post</span>
+    </a>
+    <a href="../shop/shop.html" class="nav-item">
+      <i class="fa fa-store"></i><span>Shop</span>
+    </a>
+    <a href="../profile/profile.html" class="nav-item">
+      <i class="fa fa-user"></i><span>Profile</span>
+    </a>
+  </nav>
+
+  <script src="chat_hub.js"></script>
+</body>
+</html>

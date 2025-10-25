@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PolyPals Home</title>
+  <link rel="stylesheet" href="../community/style.css">
+  <link rel="stylesheet" href="home-redesign.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+  <!-- 🌟 Top Navbar -->
+  <header class="nav">
+    <a class="brand" href="index.html">
+      <img src="../../img/logo.jpeg" alt="PolyPals logo">
+      <span class="brand__name">PolyPals</span>
+    </a>
+    <div class="nav-right">
+  <div class="points-claim" id="claimPointsBtn" title="Daily Login Reward">
+    <i class="fa-solid fa-gift"></i>
+    <span class="points-badge" id="claimBadge">+2</span>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main class="home-layout">
+    <!-- ❤️ LEFT COLUMN -->
+    <aside class="left-activity">
+      <div class="activity-scroll">
+        <div class="activity-section" id="likesActivity">
+          <h3><i class="fa-solid fa-heart"></i> Likes</h3>
+          <div class="activity-list" id="likesList"></div>
+        </div>
+
+        <div class="activity-section" id="commentsActivity">
+          <h3><i class="fa-solid fa-comment"></i> Comments</h3>
+          <div class="activity-list" id="commentsList"></div>
+        </div>
+
+        <div class="activity-section" id="followsActivity">
+          <h3><i class="fa-solid fa-user-plus"></i> Follows</h3>
+          <div class="activity-list" id="followsList"></div>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- 🔮 PUBLIC PROFILE POPUP OVERLAY -->
+    <div id="profileOverlay" class="profile-overlay hidden">
+      <div class="profile-modal">
+        <button id="closeProfilePopup" class="close-profile">&times;</button>
+        <div id="profileContent">Loading profile...</div>
+      </div>
+    </div>
+
+    <!-- 📰 CENTER COLUMN -->
+    <section class="main-feed" id="feedContainer">
+      <div class="feed-loading">
+        <i class="fa fa-spinner fa-spin"></i>
+        <p>Loading your feed...</p>
+      </div>
+
+      <!-- 🧩 POST TEMPLATE -->
+      <template id="postTemplate">
+        <div class="post-wrapper">
+          <!-- LEFT: Post -->
+          <div class="post-content">
+            <!-- Header -->
+            <div class="post-header">
+              <div class="user-info">
+                <img class="avatar" src="https://placehold.co/50x50" alt="user">
+                <div>
+                  <h4 class="username">Username</h4>
+                  <p class="course">Course / Position</p>
+                </div>
+              </div>
+              <div class="post-header-right">
+                <p class="post-time">—</p>
+                <div class="menu-group">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                  <div class="menu-popup">
+                    <button class="report-btn"><i class="fa-solid fa-flag"></i> Report</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Media -->
+            <div class="post-media"></div>
+
+            <!-- Caption -->
+            <p class="post-caption"></p>
+
+            <!-- Footer -->
+            <div class="post-footer">
+              <div class="action-group">
+                <i class="fa-regular fa-heart like-btn"></i> <span class="like-count">0 Likes</span>
+              </div>
+              <div class="action-group">
+                <i class="fa-regular fa-comment comment-btn"></i> <span class="comment-count">0 Comments</span>
+              </div>
+              <div class="action-group">
+                <i class="fa-solid fa-share-nodes share-btn"></i> <span class="share-count">0 Shares</span>
+              </div>
+              <div class="action-group">
+                <i class="fa-regular fa-bookmark save-btn"></i> <span class="save-count">Saved</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: Comments (desktop) -->
+          <div class="comment-side">
+            <div class="comments-scroll">
+              <div class="comments-list" id="commentsList">
+                </div>
+            </div>
+
+            <div class="comment-input">
+              <input type="text" id="commentText" placeholder="Add a comment...">
+              <button id="sendComment"><i class="fa fa-paper-plane"></i></button>
+            </div>
+          </div>
+        </div>
+      </template>
+    </section>
+
+    <!-- 🔮 Overlay background (mobile comment) -->
+    <div class="overlay-bg" id="overlayBg"></div>
+  </main>
+
+  <!-- 💬 Comment Popup (kept for your UI — optional) -->
+  <div id="commentPopup" class="comment-popup hidden">
+    <div class="popup-content">
+      <button id="closePopup" class="close-popup"><i class="fa fa-times"></i></button>
+      <div class="popup-media" id="popupMedia"></div>
+      <div class="popup-caption" id="popupCaption"></div>
+      <div class="comments-list" id="commentsList"></div>
+      <div class="comment-input">
+        <input type="text" id="commentText" placeholder="Add a comment...">
+        <button id="sendComment"><i class="fa fa-paper-plane"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <a href="../community/index.html" class="nav-item "><i class="fa fa-users"></i><span>Community</span></a>
+    <a href="../home/home.html" class="nav-item active"><i class="fa fa-home"></i><span>Home</span></a>
+    <a href="../post/post.html" class="nav-item"><i class="fa fa-plus-circle"></i><span>Post</span></a>
+    <a href="../shop/shop.html" class="nav-item"><i class="fa fa-store"></i><span>Shop</span></a>
+    <a href="../profile/profile.html" class="nav-item"><i class="fa fa-user"></i><span>Profile</span></a>
+  </nav>
+
+  <!-- Firebase v8 SDK (classic) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+
+<!-- Your Firebase config -->
+<script src="../../firebase-config.js"></script>
+
+<!-- Your page logic -->
+<script src="home.js"></script>
+
+
+</body>
+</html>

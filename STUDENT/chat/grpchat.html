@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Group Chat</title>
+  <link rel="stylesheet" href="grpchat.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+
+
+
+<div class="chat-top">
+  <div class="left">
+    <div id="groupIcon" class="group-icon">G</div>
+    <div id="groupName">Group Chat</div>
+  </div>
+  <i id="groupInfoBtn" class="fa fa-info-circle"></i>
+</div>
+
+<div id="chatBody" class="chat-body"></div>
+
+<div class="chat-bottom">
+  <i id="attachBtn" class="fa fa-paperclip"></i>
+  <input id="fileInput" type="file" hidden />
+
+  <input id="msgInput" type="text" placeholder="Type a message...">
+  <i id="sendBtn" class="fa fa-paper-plane"></i>
+</div>
+
+<!-- 🌐 Group Info Sidebar -->
+<div id="groupInfo" class="group-info">
+  <div class="group-header">
+    <h3 id="infoGroupName">Group Info</h3>
+    <i id="closeInfo" class="fa fa-times"></i>
+  </div>
+
+  <div class="group-body">
+    <div class="group-summary">
+      <img id="infoGroupIcon" src="https://placehold.co/100x100?text=G" alt="Group" class="info-group-icon" />
+      <p id="infoGroupDesc">No description provided.</p>
+      <button id="inviteBtn" class="invite-btn"><i class="fa fa-link"></i> Invite via Link</button>
+    </div>
+
+    <h4>Members</h4>
+    <ul id="memberList" class="member-list"></ul>
+
+    <div class="media-tabs">
+      <button id="tabImages" class="active">Images</button>
+      <button id="tabDocs">Documents</button>
+    </div>
+
+    <div id="imageGrid" class="media-grid"></div>
+    <div id="docGrid" class="media-grid hidden"></div>
+  </div>
+</div>
+
+<!-- 🖼️ Fullscreen Image Viewer -->
+<div id="imageViewer" class="image-viewer hidden">
+  <img id="viewerImg" src="" alt="preview" />
+  <span id="closeViewer">&times;</span>
+</div>
+
+<!-- ⚙️ Group Edit Modal -->
+<div id="editGroupModal" class="modal hidden">
+  <div class="modal-content">
+    <h3>Edit Group Settings</h3>
+    <label>Group Name:</label>
+    <input id="editGroupName" type="text" />
+    <label>Description:</label>
+    <textarea id="editGroupDesc"></textarea>
+    <label>Group Icon:</label>
+    <input id="editGroupIcon" type="file" accept="image/*" />
+    <div class="modal-actions">
+      <button id="saveGroupChanges" class="invite-btn">Save</button>
+      <button id="cancelEdit" class="invite-btn" style="background:#aaa;">Cancel</button>
+    </div>
+  </div>
+</div>
+
+  <!-- ✅ Firebase SDKs FIRST -->
+  <!-- ✅ Firebase v8 CDN (Compatible with your existing syntax) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
+<!-- ✅ Your Firebase Config -->
+<script src="../../firebase-config.js"></script>
+
+<!-- ✅ Your Group Chat Script -->
+<script src="grpchat.js"></script>
+
+</body>
+</html>

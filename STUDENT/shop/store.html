@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Store - Poly Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Global navs -->
+  <link rel="stylesheet" href="../community/style.css" />
+  <!-- Page CSS -->
+  <link rel="stylesheet" href="store.css" />
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- Global top nav -->
+  <div class="nav">
+    <a href="shop.html" class="back-btn"><i class="fa fa-arrow-left" style="color:white"></i></a>
+    <span class="brand__name">Store</span>
+    <a href="cart.html" class="cart-link"><i class="fa fa-shopping-cart"></i><span class="cart-count">0</span></a>
+  </div>
+
+  <!-- Banner -->
+  <div class="store-banner">
+    <img src="../../img/poly.png" alt="Store Banner" />
+  </div>
+
+  <!-- Seller Info -->
+  <section class="seller-card">
+    <img id="storeLogo" src="../../img/logo.jpeg" alt="Store Logo" />
+    <div class="seller-info">
+      <h3 id="storeTitle">Mak Cik’s Kitchen</h3>
+      <p id="storeTagline">Nasi lemak & kuih setiap pagi!</p>
+      <p><strong>About:</strong> <span id="storeAbout">Serving students since 2015</span></p>
+      <button class="qr-btn"><i class="fa fa-qrcode"></i> View Bank QR</button>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="product-list" id="productList">
+    <!-- demo row -->
+    <div class="product-row">
+      <img src="../../img/nasilemak.jpg" alt="Product" />
+      <div class="product-info">
+        <h3>Nasi Lemak</h3>
+        <p class="desc">Sambal, egg, cucumber.</p>
+        <p class="price">RM5 <span class="stock">| 20 left</span></p>
+        <button class="add-to-cart"
+                data-store="Mak Cik’s Kitchen"
+                data-name="Nasi Lemak"
+                data-price="5">
+          <i class="fa fa-cart-plus"></i> Add
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bank QR Modal -->
+  <div class="qr-modal" id="qrModal">
+    <div class="qr-content">
+      <span class="close">&times;</span>
+      <h3>Bank QR</h3>
+      <img id="qrImage" src="../../img/sample-qr.png" alt="Bank QR" />
+      <p><strong>Account Holder:</strong> <span id="accHolder">John Doe</span></p>
+      <p><strong>Bank:</strong> <span id="bankName">Maybank</span></p>
+      <p><strong>Account:</strong> <span id="bankAcc">1234567890</span></p>
+    </div>
+  </div>
+
+  <!-- Bottom nav -->
+  <nav class="bottom-nav">
+    <a href="../community/index.html" class="nav-item"><i class="fa fa-users"></i><span>Community</span></a>
+    <a href="../home/home.html" class="nav-item"><i class="fa fa-home"></i><span>Home</span></a>
+    <a href="../post/post.html" class="nav-item"><i class="fa fa-plus-circle"></i><span>Post</span></a>
+    <a href="shop.html" class="nav-item active"><i class="fa fa-store"></i><span>Shop</span></a>
+    <a href="../profile/profile.html" class="nav-item"><i class="fa fa-user"></i><span>Profile</span></a>
+  </nav>
+
+  <script src="store.js"></script>
+</body>
+</html>

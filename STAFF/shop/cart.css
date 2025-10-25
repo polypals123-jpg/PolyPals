@@ -1,0 +1,79 @@
+/* spacing for global navs */
+body { padding-bottom:70px; }
+
+.nav{
+  max-height: 60px;
+}
+
+.nav h2{
+  text-align: center;
+}
+
+/* container + seller group */
+.cart-container { margin:15px; display:flex; flex-direction:column; gap:15px; }
+.cart-seller{
+  background:#fff; padding:15px; border-radius:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+.cart-seller h3{ margin:0 0 10px; color:#6C63FF; }
+
+/* items table-ish */
+.cart-item{
+  display:flex; gap:8px; padding:8px 0; border-bottom:1px solid #eee;
+}
+.cart-item:last-child{ border-bottom:none; }
+.item-name{ flex:2; }
+.item-qty{ width:60px; text-align:center; }
+.item-price{ width:80px; text-align:right; }
+
+/* timeline (4 steps) */
+.order-timeline{
+  list-style:none; padding:0; margin:12px 0;
+  display:flex; justify-content:space-between;
+}
+.order-timeline li{
+  flex:1; text-align:center; font-size:.85rem; color:#777; position:relative;
+}
+.order-timeline li::before{
+  content:""; position:absolute; left:50%; top:-8px; transform:translateX(-50%);
+  width:10px; height:10px; border-radius:50%; background:#ddd;
+}
+.order-timeline li.active{ color:#6C63FF; font-weight:700; }
+.order-timeline li.active::before{ background:#6C63FF; }
+
+/* actions */
+.qr-section{ text-align:center; margin-top:8px; }
+.qr-btn{
+  background:#6C63FF; color:#fff; border:none; border-radius:20px;
+  padding:8px 14px; cursor:pointer;
+}
+.payment-section{ margin-top:10px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+.proof-label{
+  background:#6C63FF; color:#fff; padding:8px 12px; border-radius:8px; cursor:pointer; display:inline-block;
+}
+.proof-input{ display:none; }
+.view-proof-btn{
+  background:#007aff; color:#fff; border:none; border-radius:8px; padding:8px 12px; cursor:pointer;
+}
+
+/* modals (proof + qr) */
+.proof-modal, .qr-modal{
+  display:none; position:fixed; inset:0; background:rgba(0,0,0,.6);
+  justify-content:center; align-items:center; z-index:2000;
+}
+.proof-content, .qr-content{
+  background:#fff; padding:20px; border-radius:12px; width:90%; max-width:420px; text-align:center; position:relative;
+}
+.proof-content img, .proof-content iframe{ width:100%; border-radius:8px; margin-top:10px; }
+.qr-content img{ width:220px; margin:10px 0; }
+.proof-content .close, .qr-content .close{
+  position:absolute; right:15px; top:10px; font-size:1.4rem; cursor:pointer;
+}
+
+.receipt-btn {
+  background: #28a745;
+  color: #fff;
+  border-radius: 8px;
+  padding: 6px 12px;
+  text-decoration: none;
+}
